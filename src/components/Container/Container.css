@@ -1,0 +1,19 @@
+.container {
+  max-width: calc(100% - 140px);
+}
+
+.app__container {
+  margin: auto;
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: calc(100% - 60px);
+  }
+}
+
+@media (max-width: 320px) {
+  .container {
+    max-width: calc(100% - 30px);
+  }
+}

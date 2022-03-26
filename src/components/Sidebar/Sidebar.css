@@ -1,0 +1,78 @@
+.app__overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.app__overlay_visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.sidebar {
+  box-sizing: border-box;
+  width: 540px;
+  height: 100vh;
+  background-color: #202020;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 159px 90px 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+@media (max-width: 540px) {
+  .sidebar {
+    width: 100vw;
+    padding: 144px 10px 48px;
+  }
+}
+
+.sidebar__links {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar__link {
+  list-style: none;
+  margin-bottom: 28px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 0.82;
+}
+
+.sidebar__link_active {
+  padding-bottom: 6px;
+  border-bottom: 2px solid #fff;
+}
+
+.sidebar__link:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar_hidden {
+  transform: translateX(100%);
+}
+
+.sidebar_visible {
+  transform: translateX(0);
+}
+
+.sidebar__close-icon {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+}
