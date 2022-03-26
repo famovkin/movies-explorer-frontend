@@ -48,10 +48,9 @@
   list-style: none;
   margin-bottom: 28px;
   cursor: pointer;
-  color: #fff;
   font-size: 18px;
   font-weight: 500;
-  line-height: 0.82;
+  line-height: 1.45;
 }
 
 .sidebar__link_active {
