@@ -11,23 +11,6 @@
   }
 }
 
-.footer__container {
-  width: calc(100% - 140px);
-  margin: auto;
-}
-
-@media (max-width: 768px) {
-  .footer__container {
-    width: calc(100% - 60px);
-  }
-}
-
-@media (max-width: 500px) {
-  .footer__container {
-    width: calc(100% - 20px);
-  }
-}
-
 .footer__text {
   margin: 0;
   color: #8b8b8b;

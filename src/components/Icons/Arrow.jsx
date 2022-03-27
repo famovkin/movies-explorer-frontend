@@ -1,6 +1,6 @@
 import React from "react";
 
-const LinkIcon = ({ className }) => (
+const Arrow = ({ className }) => (
   <svg
     width="18"
     height="17"
@@ -16,4 +16,4 @@ const LinkIcon = ({ className }) => (
   </svg>
 );
 
-export default LinkIcon;
+export default Arrow;

@@ -10,7 +10,7 @@ const stack = ["HTML", "CSS", "JS", "React", "Git", "Express.js", "mongoDB"];
 function Techs() {
   return (
     <section className="techs">
-      <Container>
+      <Container modifier="container_type_landing">
         <Title title="Технологии" />
         <div className="techs__texts">
           <h3 className="techs__title">7 технологий</h3>

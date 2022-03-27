@@ -1,15 +1,15 @@
 import Logo from "./Logo";
-import AccountIcon from "./AccountIcon";
+import Account from "./Account";
 import Burger from "./Burger";
 import Close from "./Close";
-import LinkIcon from "./LinkIcon";
+import Arrow from "./Arrow";
 
 const Icons = {
   Logo,
-  AccountIcon,
+  Account,
   Burger,
   Close,
-  LinkIcon,
+  Arrow,
 };
 
 export default Icons;

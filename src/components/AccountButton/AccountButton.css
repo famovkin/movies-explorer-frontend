@@ -3,6 +3,7 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  padding: 0;
 }
 
 .button__text_type_account {

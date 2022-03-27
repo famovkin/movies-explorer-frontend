@@ -1,6 +1,6 @@
 import React from "react";
 
-const AccountIcon = ({ className }) => (
+const Account = ({ className }) => (
   <svg
     width="12"
     height="12"
@@ -18,4 +18,4 @@ const AccountIcon = ({ className }) => (
   </svg>
 );
 
-export default AccountIcon;
+export default Account;

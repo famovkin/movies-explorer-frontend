@@ -23,7 +23,7 @@ const textCards = [
 
 function AboutProject() {
   return (
-    <Container>
+    <Container modifier="container_type_landing">
       <section className="about">
         <Title title="О проекте" />
         <div className="about__cards">

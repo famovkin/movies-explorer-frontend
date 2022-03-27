@@ -8,7 +8,7 @@ function Project({ title, url }) {
     <li className="project">
       <a href={url} className="project__link" target="_blank" rel="noreferrer">
         {title}
-        <Icons.LinkIcon className="project__icon" />
+        <Icons.Arrow className="project__icon" />
       </a>
     </li>
   );

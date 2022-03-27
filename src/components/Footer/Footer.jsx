@@ -1,6 +1,7 @@
 import React from "react";
-import Link from "../Link/Link";
 
+import Link from "../Link/Link";
+import Container from "../Container/Container";
 import "./Footer.css";
 
 const links = [
@@ -24,7 +25,7 @@ const links = [
 function Footer() {
   return (
     <footer className="footer">
-      <div className="footer__container">
+      <Container>
         <p className="footer__text">
           Учебный проект Яндекс.Практикум х BeatFilm.
         </p>
@@ -36,7 +37,7 @@ function Footer() {
             ))}
           </ul>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }
