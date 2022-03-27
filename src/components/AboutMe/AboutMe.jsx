@@ -2,11 +2,45 @@ import React from "react";
 
 import Title from "../Title/Title";
 import Container from "../Container/Container";
-import Icons from "../Icons/";
+import Link from "../Link/Link";
+import Project from "../Project/Project";
 import photo from "../../images/avatar.jpeg";
 import "./AboutMe.css";
 
 function AboutMe() {
+  const links = [
+    {
+      id: 1,
+      title: "Github",
+      url: "https://github.com/famovkin",
+      modifier: "medium",
+    },
+    {
+      id: 2,
+      title: "Telegram",
+      url: "https://t.me/famovkin",
+      modifier: "medium",
+    },
+  ];
+
+  const projects = [
+    {
+      id: 1,
+      title: "Статичный сайт",
+      url: "https://famovkin.github.io/how-to-learn/",
+    },
+    {
+      id: 2,
+      title: "Адаптивный сайт",
+      url: "https://famovkin.github.io/russian-travel/",
+    },
+    {
+      id: 3,
+      title: "Одностраничное приложение",
+      url: "https://mesto.nomoredomains.xyz/",
+    },
+  ];
+
   return (
     <Container>
       <section className="about-me main__about-me">
@@ -25,16 +59,9 @@ function AboutMe() {
               заниматься фриланс-заказами и ушёл с постоянной работы.
             </p>
             <ul className="student__socials">
-              <li className="student__socials-item">
-                <a className="student__link" href="https://github.com/famovkin">
-                  Github
-                </a>
-              </li>
-              <li className="student__socials-item">
-                <a className="student__link" href="https://t.me/famovkin">
-                  Telegram
-                </a>
-              </li>
+              {links.map((link) => (
+                <Link key={link.id} {...link} />
+              ))}
             </ul>
           </div>
           <img className="student__photo" src={photo} alt="Толя" />
@@ -42,39 +69,9 @@ function AboutMe() {
         <div className="portfolio">
           <h3 className="portfolio__title">Портфолио</h3>
           <ul className="portfolio__projects">
-            <li className="project__item">
-              <a
-                href="https://famovkin.github.io/how-to-learn/"
-                className="project__link"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Статичный сайт
-                <Icons.LinkIcon className="project__icon" />
-              </a>
-            </li>
-            <li className="project__item">
-              <a
-                href="https://famovkin.github.io/russian-travel/"
-                className="project__link"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Адаптивный сайт
-                <Icons.LinkIcon className="project__icon" />
-              </a>
-            </li>
-            <li className="project__item">
-              <a
-                href="https://mesto.nomoredomains.xyz/"
-                className="project__link"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Одностраничное приложение
-                <Icons.LinkIcon className="project__icon" />
-              </a>
-            </li>
+            {projects.map((project) => (
+              <Project key={project.id} {...project} />
+            ))}
           </ul>
         </div>
       </section>

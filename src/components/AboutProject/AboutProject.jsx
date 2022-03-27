@@ -27,8 +27,8 @@ function AboutProject() {
       <section className="about">
         <Title title="О проекте" />
         <div className="about__cards">
-          {textCards.map(({ id, title, description }) => (
-            <TextCard key={id} title={title} description={description} />
+          {textCards.map((card) => (
+            <TextCard key={card.id} {...card} />
           ))}
         </div>
         <Roadmap />

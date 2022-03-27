@@ -1,0 +1,16 @@
+.link {
+  list-style: none;
+}
+
+.link__item {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.21;
+  color: #fff;
+  text-decoration: none;
+}
+
+.link__item_type_medium {
+  font-size: 14px;
+  font-weight: 500;
+}
