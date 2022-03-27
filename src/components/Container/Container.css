@@ -6,7 +6,7 @@
   margin: auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .container {
     max-width: calc(100% - 60px);
   }
@@ -18,7 +18,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .container_type_landing {
     max-width: calc(100% - 100px);
   }

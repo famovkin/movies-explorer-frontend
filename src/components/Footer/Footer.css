@@ -5,18 +5,18 @@
   line-height: 1.21;
 }
 
-@media (max-width: 768px) {
-  .footer {
-    font-size: 12px;
-  }
-}
-
 .footer__text {
   margin: 0;
   color: #8b8b8b;
   text-align: center;
   border-bottom: 1px solid #424242;
   padding-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .footer__text {
+    font-size: 12px;
+  }
 }
 
 .footer__year {
