@@ -8,12 +8,12 @@
 
 @media (max-width: 768px) {
   .container {
-    max-width: calc(100% - 60px);
+    max-width: calc(100% - 100px);
   }
 }
 
 @media (max-width: 320px) {
   .container {
-    max-width: calc(100% - 30px);
+    max-width: calc(100% - 32px);
   }
 }

@@ -5,9 +5,16 @@
   line-height: 1.21;
   padding-bottom: 23px;
   border-bottom: 1px solid #dadada;
+  letter-spacing: -0.04em;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
+  .title {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 500px) {
   .title {
     font-size: 18px;
     padding-bottom: 28px;

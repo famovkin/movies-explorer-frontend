@@ -42,7 +42,7 @@
   .roadmap__time {
     font-size: 11px;
     padding: 11px 10px;
-    margin-bottom: 10px;
+    margin-bottom: 9px;
   }
 }
 
@@ -54,4 +54,10 @@
 .roadmap__title {
   margin: 0;
   color: #8b8b8b;
+}
+
+@media (max-width: 500px) {
+  .roadmap__title {
+    font-size: 11px;
+  }
 }

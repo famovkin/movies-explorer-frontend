@@ -6,7 +6,13 @@
 }
 
 .app__header {
-  margin-bottom: 30px;
+  margin-bottom: 39px;
+}
+
+@media (max-width: 500px) {
+  .app__header {
+    margin-bottom: 30px;
+  }
 }
 
 .header__nav {

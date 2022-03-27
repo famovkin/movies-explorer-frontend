@@ -3,8 +3,18 @@
   gap: 10px;
 }
 
+@media (max-width: 500px) {
+  .nav-tab {
+    gap: 6px;
+  }
+}
+
 .nav-tab__link {
-  padding: 10px 23px;
+  width: 96px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #303030;
   border-radius: 10px;
   color: #fff;
@@ -14,15 +24,10 @@
   line-height: 1.33;
 }
 
-@media (max-width: 768px) {
-  .nav-tab__link {
-    padding: 10px 17px;
-  }
-}
-
 @media (max-width: 500px) {
   .nav-tab__link {
-    padding: 5px 15px;
+    width: 82px;
+    height: 26px;
     font-size: 10px;
     line-height: 1.6;
   }
