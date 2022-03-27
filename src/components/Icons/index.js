@@ -1,4 +1,3 @@
-import Logo from "./Logo";
 import Account from "./Account";
 import Burger from "./Burger";
 import Close from "./Close";
@@ -8,7 +7,6 @@ import Like from "./Like";
 import Delete from "./Delete";
 
 const Icons = {
-  Logo,
   Account,
   Burger,
   Close,

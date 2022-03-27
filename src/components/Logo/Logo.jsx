@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./Logo.css";
+
 const Logo = ({ className }) => (
   <svg
     width="38"

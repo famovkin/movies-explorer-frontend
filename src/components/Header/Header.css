@@ -20,16 +20,6 @@
   align-items: center;
 }
 
-.header__logo {
-  margin-right: 44px;
-}
-
-@media (max-width: 768px) {
-  .header__logo {
-    margin: 0;
-  }
-}
-
 .header__links {
   display: flex;
   gap: 16px;
@@ -60,12 +50,6 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  .header__account-menu {
-    display: none;
-  }
 }
 
 .header__burger-icon {
