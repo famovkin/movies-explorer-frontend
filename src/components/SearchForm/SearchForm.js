@@ -1,11 +1,12 @@
 import React from "react";
+import Button from "../Button/Button";
 
 import Icons from "../Icons";
 import "./SearchForm.css";
 
 function SearchForm() {
   return (
-    <form className="search-form app__search-form">
+    <form className="search-form app__search-form" name="search-movie">
       <div className="search-form__string">
         <Icons.Search className="search-form__icon" />
         <input
@@ -13,9 +14,12 @@ function SearchForm() {
           placeholder="Фильм"
           required
         ></input>
-        <button className="button button_type_search button_type_blue">
+        <Button
+          className="button button_type_search button_type_blue"
+          type="submit"
+        >
           <Icons.Search />
-        </button>
+        </Button>
       </div>
       <label className="search-form__label" htmlFor="short-film">
         <input

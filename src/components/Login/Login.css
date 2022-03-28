@@ -1,0 +1,30 @@
+.login {
+  width: 100%;
+}
+
+.login__text {
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+@media (max-width: 500px) {
+  .login__text {
+    font-size: 12px;
+  }
+}
+
+.login__link {
+  color: #4285f4;
+  text-decoration: none;
+}
+
+.login__inputs {
+  margin-bottom: 162px;
+}
+
+@media (max-width: 500px) {
+  .login__inputs {
+    margin-bottom: 251px;
+  }
+}

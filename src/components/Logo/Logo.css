@@ -7,3 +7,13 @@
     margin: 0;
   }
 }
+
+.unauth-page__logo {
+  margin-bottom: 40px;
+}
+
+@media (max-width: 500px) {
+  .unauth-page__logo {
+    margin-bottom: 50px;
+  }
+}

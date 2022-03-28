@@ -67,3 +67,20 @@
   align-items: center;
   justify-content: center;
 }
+
+.button_type_submit {
+  width: 100%;
+  padding: 13px 0;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.21;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 500px) {
+  .button_type_submit {
+    font-size: 12px;
+  }
+}

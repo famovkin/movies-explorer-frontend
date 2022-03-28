@@ -1,0 +1,30 @@
+.register {
+  width: 100%;
+}
+
+.register__text {
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+@media (max-width: 500px) {
+  .register__text {
+    font-size: 12px;
+  }
+}
+
+.register__link {
+  color: #4285f4;
+  text-decoration: none;
+}
+
+.register__inputs {
+  margin-bottom: 75px;
+}
+
+@media (max-width: 500px) {
+  .register__inputs {
+    margin-bottom: 163px;
+  }
+}
