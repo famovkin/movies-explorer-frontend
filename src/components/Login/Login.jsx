@@ -11,8 +11,8 @@ function Login() {
     <UnauthPage title="Рады видеть!">
       <form className="login" name="login">
         <div className="login__inputs">
-          <Input label="E-mail" type="email" />
-          <Input label="Пароль" type="password" />
+          <Input label="E-mail" type="email" modifier="unauth" />
+          <Input label="Пароль" type="password" modifier="unauth" />
         </div>
         <Button className="button_type_blue button_type_submit" type="submit">
           Войти

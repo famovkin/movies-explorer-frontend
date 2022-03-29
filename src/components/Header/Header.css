@@ -52,6 +52,12 @@
   cursor: pointer;
 }
 
+@media (max-width: 500px) {
+  .header__account-menu {
+    margin-right: 5px;
+  }
+}
+
 .header__burger-icon {
   display: none;
 }

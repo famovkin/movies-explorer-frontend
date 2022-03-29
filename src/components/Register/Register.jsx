@@ -10,12 +10,13 @@ function Register() {
     <UnauthPage title="Добро пожаловать!">
       <form className="register" name="register">
         <div className="register__inputs">
-          <Input label="Имя" type="name" />
-          <Input label="E-mail" type="email" />
+          <Input label="Имя" type="name" modifier="unauth" />
+          <Input label="E-mail" type="email" modifier="unauth" />
           <Input
             label="Пароль"
             type="password"
             error="Что-то пошло не так..."
+            modifier="unauth"
           />
         </div>
         <Button className="button_type_blue button_type_submit" type="submit">

@@ -11,7 +11,7 @@ import "./Header.css";
 
 function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const isAuth = true; // для смены кнопок
+  const isAuth = false; // для смены кнопок
 
   const sidebarHandler = () => setIsSidebarOpen(!isSidebarOpen);
 
@@ -30,8 +30,12 @@ function Header() {
             <AccountButton />
           ) : (
             <>
-              <Button className="button_type_none">Регистрация</Button>
-              <Button className="button_type_green">Войти</Button>
+              <Button className="button_type_header button_type_white-text">
+                Регистрация
+              </Button>
+              <Button className="button_type_header button_type_green">
+                Войти
+              </Button>
             </>
           )}
         </div>
