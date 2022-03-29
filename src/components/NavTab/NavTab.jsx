@@ -5,13 +5,13 @@ import "./NavTab.css";
 function NavTab() {
   return (
     <nav className="nav-tab">
-      <a className="nav-tab__link" href="1">
+      <a className="nav-tab__link" href="#about">
         О проекте
       </a>
-      <a className="nav-tab__link" href="2">
+      <a className="nav-tab__link" href="#techs">
         Технологии
       </a>
-      <a className="nav-tab__link" href="3">
+      <a className="nav-tab__link" href="#student">
         Студент
       </a>
     </nav>

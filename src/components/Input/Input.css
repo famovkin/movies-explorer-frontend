@@ -43,7 +43,8 @@
   margin-bottom: 0;
   font-size: 11px;
   font-weight: 500;
-  flex-basis: 50px;
+  flex-basis: 40px;
+  cursor: pointer;
 }
 
 .input__field {

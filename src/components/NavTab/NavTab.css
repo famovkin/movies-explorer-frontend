@@ -22,6 +22,12 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 1.33;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-tab__link:hover {
+  transform: translateY(-5px);
+  background-color: #3DDC84;
 }
 
 @media (max-width: 500px) {

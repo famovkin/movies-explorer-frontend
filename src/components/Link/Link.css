@@ -1,5 +1,6 @@
 .link {
   list-style: none;
+  transition: all 0.2s ease-in-out;
 }
 
 .link__item {
@@ -8,6 +9,11 @@
   line-height: 1.21;
   color: #fff;
   text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.link:hover {
+  opacity: 0.5;
 }
 
 .link__item_type_medium {

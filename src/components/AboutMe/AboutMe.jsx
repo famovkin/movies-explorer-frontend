@@ -43,7 +43,7 @@ function AboutMe() {
 
   return (
     <Container modifier="container_type_landing">
-      <section className="about-me main__about-me">
+      <section className="about-me main__about-me" id="student">
         <Title title="Студент" />
         <div className="student about-me__student">
           <div className="student__information">

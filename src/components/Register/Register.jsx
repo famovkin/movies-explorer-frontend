@@ -7,7 +7,12 @@ import "./Register.css";
 
 function Register() {
   return (
-    <UnauthPage title="Добро пожаловать!">
+    <UnauthPage
+      title="Добро пожаловать!"
+      text="Уже зарегистрированы?"
+      link="#"
+      linkText="Войти"
+    >
       <form className="register" name="register">
         <div className="register__inputs">
           <Input label="Имя" type="name" modifier="unauth" />
@@ -22,12 +27,6 @@ function Register() {
         <Button className="button_type_blue button_type_submit" type="submit">
           Зарегистрироваться
         </Button>
-        <p className="register__text">
-          Уже зарегистрированы?{" "}
-          <a className="register__link" href="1">
-            Войти
-          </a>
-        </p>
       </form>
     </UnauthPage>
   );

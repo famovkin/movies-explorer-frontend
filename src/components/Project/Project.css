@@ -2,6 +2,7 @@
   list-style: none;
   border-bottom: 1px solid #424242;
   padding: 20px 0;
+  transition: all 0.2s ease-in-out;
 }
 
 @media (max-width: 768px) {
@@ -29,6 +30,15 @@
   color: #fff;
   text-decoration: none;
   letter-spacing: -0.04em;
+  transition: all 0.2s ease-in-out;
+}
+
+.project__link:hover {
+  color: #3ddc84;
+}
+
+.project__link:active {
+  transform: scale(0.99);
 }
 
 @media (max-width: 768px) {
@@ -45,9 +55,17 @@
   }
 }
 
+.project__icon {
+  transition: all 0.2s ease-in-out;
+}
+
 @media (max-width: 500px) {
   .project__icon {
     width: 10px;
     height: 10px;
   }
+}
+
+.project:hover .project__icon {
+  transform: scale(1.2);
 }

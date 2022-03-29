@@ -8,7 +8,12 @@ import "./Login.css";
 
 function Login() {
   return (
-    <UnauthPage title="Рады видеть!">
+    <UnauthPage
+      title="Рады видеть!"
+      text="Ещё не зарегистрированы?"
+      link="#"
+      linkText="Регистрация"
+    >
       <form className="login" name="login">
         <div className="login__inputs">
           <Input label="E-mail" type="email" modifier="unauth" />
@@ -17,12 +22,6 @@ function Login() {
         <Button className="button_type_blue button_type_submit" type="submit">
           Войти
         </Button>
-        <p className="login__text">
-          Ещё не зарегистрированы?{" "}
-          <a className="login__link" href="1">
-            Регистрация
-          </a>
-        </p>
       </form>
     </UnauthPage>
   );

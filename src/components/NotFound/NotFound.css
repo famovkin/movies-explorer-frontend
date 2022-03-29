@@ -56,7 +56,13 @@
 }
 
 .not-found__back {
+  display: block;
   font-size: 14px;
   color: #4285f4;
   text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.not-found__back:hover {
+  transform: scale(1.1);
 }

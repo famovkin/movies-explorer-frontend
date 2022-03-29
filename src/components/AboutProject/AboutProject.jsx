@@ -24,7 +24,7 @@ const textCards = [
 function AboutProject() {
   return (
     <Container modifier="container_type_landing">
-      <section className="about">
+      <section className="about" id="about">
         <Title title="О проекте" />
         <div className="about__cards">
           {textCards.map((card) => (

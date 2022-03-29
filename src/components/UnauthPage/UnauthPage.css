@@ -43,3 +43,26 @@
     margin-bottom: 80px;
   }
 }
+
+.unauth-page__text {
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+@media (max-width: 500px) {
+  .unauth-page__text {
+    font-size: 12px;
+  }
+}
+
+.unauth-page__link {
+  display: inline-block;
+  color: #4285f4;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.unauth-page__link:hover {
+  color: #3ddc84;
+}

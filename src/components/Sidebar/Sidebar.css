@@ -52,6 +52,11 @@
   font-size: 18px;
   font-weight: 500;
   line-height: 1.45;
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar__link:hover {
+  color: #3ddc84;
 }
 
 .sidebar__link_active {
@@ -75,4 +80,14 @@
   position: absolute;
   top: 22px;
   right: 22px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar__close-icon:hover {
+  transform: scale(1.2);
+}
+
+.sidebar__close-icon:active {
+  transform: scale(1.1);
 }

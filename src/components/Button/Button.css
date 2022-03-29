@@ -9,6 +9,15 @@
   line-height: 1.33;
   cursor: pointer;
   color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  opacity: 0.6;
+}
+
+.button:active {
+  transform: scale(0.9)
 }
 
 .button_type_header {
