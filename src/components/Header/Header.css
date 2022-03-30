@@ -40,6 +40,8 @@
   line-height: 1.38;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  color: #fff;
 }
 
 .header__link:hover {
@@ -71,4 +73,41 @@
   .header__burger-icon {
     display: block;
   }
+}
+
+.header__linked-button {
+  text-decoration: none;
+}
+
+.header__linked-logo {
+  display: block;
+  width: 38px;
+  margin-right: 44px;
+}
+
+@media (max-width: 768px) {
+  .header__linked-logo {
+    margin-right: 0;
+  }
+}
+
+.button_type_header {
+  border-radius: 3px;
+  color: black;
+}
+
+@media (max-width: 500px) {
+  .button_type_header {
+    font-size: 10px;
+    line-height: 1.6;
+    padding: 5px 10px;
+  }
+}
+
+.button_type_white-text {
+  color: #fff;
+}
+
+.button_type_green {
+  background-color: #3ddc84;
 }

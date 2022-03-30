@@ -1,6 +1,6 @@
 .logo {
   cursor: pointer;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .logo:hover {
@@ -9,24 +9,4 @@
 
 .logo:active {
   transform: scale(1);
-}
-
-.header__logo {
-  margin-right: 44px;
-}
-
-@media (max-width: 768px) {
-  .header__logo {
-    margin: 0;
-  }
-}
-
-.unauth-page__logo {
-  margin-bottom: 40px;
-}
-
-@media (max-width: 500px) {
-  .unauth-page__logo {
-    margin-bottom: 50px;
-  }
 }

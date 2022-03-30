@@ -16,7 +16,7 @@
 
 .search-form__string {
   border-bottom: 1px solid #424242;
-  margin-bottom: 27px;
+  margin-bottom: 29px;
   position: relative;
 }
 
@@ -116,4 +116,17 @@
   .search-form__icon {
     display: none;
   }
+}
+
+.button_type_search {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 34px;
+  padding: 0;
+  border-radius: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

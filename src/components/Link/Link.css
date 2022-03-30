@@ -15,8 +15,3 @@
 .link:hover {
   opacity: 0.5;
 }
-
-.link__item_type_medium {
-  font-size: 14px;
-  font-weight: 500;
-}

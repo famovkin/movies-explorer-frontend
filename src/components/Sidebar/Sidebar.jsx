@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink, Link } from "react-router-dom";
 
 import AccountButton from "../AccountButton/AccountButton";
 import Icons from "../Icons/";
@@ -10,14 +11,33 @@ function Sidebar({ isOpen, closeHandler }) {
       <div
         className={`sidebar ${isOpen ? "sidebar_visible" : "sidebar_hidden"}`}
       >
-        <ul className="sidebar__links">
-          <li className="sidebar__link">Главная</li>
-          <li className="sidebar__link">Фильмы</li>
-          <li className="sidebar__link sidebar__link_active">
-            Сохраненные фильмы
-          </li>
-        </ul>
-        <AccountButton />
+        <nav className="sidebar__links">
+          <NavLink
+            className="sidebar__link"
+            activeClassName="sidebar__link_active"
+            to="/"
+            exact
+          >
+            Главная
+          </NavLink>
+          <NavLink
+            className="sidebar__link"
+            activeClassName="sidebar__link_active"
+            to="/movies"
+          >
+            Фильмы
+          </NavLink>
+          <NavLink
+            className="sidebar__link"
+            activeClassName="sidebar__link_active"
+            to="saved-movies"
+          >
+            Сохранённые фильмы
+          </NavLink>
+        </nav>
+        <Link className="sidebar__linked-button" to="/profile">
+          <AccountButton />
+        </Link>
         <Icons.Close className="sidebar__close-icon" handler={closeHandler} />
       </div>
     </div>

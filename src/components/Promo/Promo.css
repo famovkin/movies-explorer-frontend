@@ -13,14 +13,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 160px 0 30px;
+  padding: 152px 0 37px;
 }
 
 @media (max-width: 768px) {
   .promo {
     height: 834px;
     max-width: calc(100% - 40px);
-    padding: 350px 24px 30px;
+    padding: 342px 24px 37px;
   }
 }
 
@@ -28,7 +28,7 @@
   .promo {
     height: 586px;
     max-width: calc(100% - 28px);
-    padding: 220px 10px 17px;
+    padding: 217px 10px 20px;
   }
 }
 

@@ -1,16 +1,16 @@
 .about {
-  padding: 110px 0;
+  padding: 105px 0;
 }
 
 @media (max-width: 768px) {
   .about {
-    padding: 90px 0;
+    padding: 85px 0;
   }
 }
 
 @media (max-width: 500px) {
   .about {
-    padding: 70px 0;
+    padding: 67px 0 62px 4px;
   }
 }
 

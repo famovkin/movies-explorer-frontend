@@ -17,28 +17,7 @@
 }
 
 .button:active {
-  transform: scale(0.9)
-}
-
-.button_type_header {
-  border-radius: 3px;
-  color: black;
-}
-
-@media (max-width: 500px) {
-  .button_type_header {
-    font-size: 10px;
-    line-height: 1.6;
-    padding: 5px 10px;
-  }
-}
-
-.button_type_white-text {
-  color: #fff;
-}
-
-.button_type_green {
-  background-color: #3ddc84;
+  transform: scale(0.9);
 }
 
 .button_type_blue {
@@ -47,45 +26,6 @@
 
 .button_type_red {
   background-color: #ee3465;
-}
-
-.button_type_gray {
-  background-color: #313131;
-}
-
-.button_type_card {
-  border-radius: 30px;
-  padding: 0;
-  width: 100px;
-  height: 29px;
-  font-size: 12px;
-  line-height: 0.91;
-}
-
-.button_type_more {
-  width: 320px;
-  height: 36px;
-  border-radius: 6px;
-  background-color: #2f2f2f;
-}
-
-@media (max-width: 500px) {
-  .button_type_more {
-    width: 240px;
-  }
-}
-
-.button_type_search {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 80px;
-  height: 34px;
-  padding: 0;
-  border-radius: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .button_type_submit {
@@ -101,19 +41,4 @@
   .button_type_submit {
     font-size: 12px;
   }
-}
-
-.button_type_profile {
-  font-size: 13px;
-  font-weight: 400;
-}
-
-@media (max-width: 500px) {
-  .button_type_profile {
-    font-size: 12px;
-  }
-}
-
-.button_type_red-text {
-  color: #ee3465;
 }

@@ -10,20 +10,34 @@ function Register() {
     <UnauthPage
       title="Добро пожаловать!"
       text="Уже зарегистрированы?"
-      link="#"
+      link="/signin"
       linkText="Войти"
     >
       <form className="register" name="register">
-        <div className="register__inputs">
-          <Input label="Имя" type="name" modifier="unauth" />
-          <Input label="E-mail" type="email" modifier="unauth" />
+        <fieldset className="register__inputs">
           <Input
+            name="name"
+            label="Имя"
+            modifier="unauth"
+            type="text"
+            required
+          />
+          <Input
+            name="email"
+            label="E-mail"
+            modifier="unauth"
+            type="email"
+            required
+          />
+          <Input
+            name="password"
             label="Пароль"
-            type="password"
             error="Что-то пошло не так..."
             modifier="unauth"
+            required
+            type="password"
           />
-        </div>
+        </fieldset>
         <Button className="button_type_blue button_type_submit" type="submit">
           Зарегистрироваться
         </Button>

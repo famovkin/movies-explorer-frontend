@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 18px 0;
+  padding: 16px 18px 0;
   margin-bottom: 18px;
 }
 
@@ -79,4 +79,17 @@
 .movies-card__footer {
   display: flex;
   justify-content: center;
+}
+
+.button_type_gray {
+  background-color: #313131;
+}
+
+.button_type_card {
+  border-radius: 30px;
+  padding: 0;
+  width: 100px;
+  height: 29px;
+  font-size: 12px;
+  line-height: 0.91;
 }

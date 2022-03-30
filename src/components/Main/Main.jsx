@@ -8,14 +8,16 @@ import Header from "../Header/Header";
 
 function Main() {
   return (
-    <main className="main">
+    <>
       <Header />
-      <Promo />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Footer />
-    </main>
+      <main className="main">
+        <Promo />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+        <Footer />
+      </main>
+    </>
   );
 }
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
 
 import Icons from "../Icons";
 import Button from "../Button/Button";
@@ -19,23 +20,43 @@ function Header() {
     <Container>
       <header className="header app__header">
         <nav className="header__nav">
-          <Logo className="logo header__logo" />
-          <ul className="header__links">
-            <li className="header__link header__link_active">Фильмы</li>
-            <li className="header__link">Сохраненные фильмы</li>
-          </ul>
+          <Link className="header__linked-logo" to="/">
+            <Logo className="logo header__logo" />
+          </Link>
+          <div className="header__links">
+            <NavLink
+              className="header__link"
+              activeClassName="header__link_active"
+              to="/movies"
+            >
+              Фильмы
+            </NavLink>
+            <NavLink
+              className="header__link"
+              activeClassName="header__link_active"
+              to="/saved-movies"
+            >
+              Сохраненные фильмы
+            </NavLink>
+          </div>
         </nav>
         <div className="header__account-menu">
           {isAuth ? (
-            <AccountButton />
+            <Link className="header__linked-button" to="/profile">
+              <AccountButton modifier="button_type_hidden" />
+            </Link>
           ) : (
             <>
-              <Button className="button_type_header button_type_white-text">
-                Регистрация
-              </Button>
-              <Button className="button_type_header button_type_green">
-                Войти
-              </Button>
+              <Link to="/signup">
+                <Button className="button_type_header button_type_white-text">
+                  Регистрация
+                </Button>
+              </Link>
+              <Link to="/signin">
+                <Button className="button_type_header button_type_green">
+                  Войти
+                </Button>
+              </Link>
             </>
           )}
         </div>

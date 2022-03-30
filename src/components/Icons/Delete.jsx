@@ -1,6 +1,6 @@
 import React from "react";
 
-const SvgDelete = () => (
+const Delete = () => (
   <svg
     width="8"
     height="7"
@@ -17,4 +17,4 @@ const SvgDelete = () => (
   </svg>
 );
 
-export default SvgDelete;
+export default Delete;

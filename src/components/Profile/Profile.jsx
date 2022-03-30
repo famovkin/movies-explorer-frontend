@@ -12,15 +12,31 @@ function Profile() {
       <div className="profile__container">
         <h2 className="profile__title">Привет, Виталий!</h2>
         <form className="profile__form">
-          <Input label="Имя" type="name" modifier="profile" />
-          <Input label="E-mail" type="email" modifier="profile" />
+          <fieldset className="profile__inputs">
+            <Input
+              name="name"
+              label="Имя"
+              modifier="profile"
+              type="text"
+              required
+            />
+            <Input
+              name="email"
+              label="E-mail"
+              modifier="profile"
+              type="email"
+              required
+            />
+          </fieldset>
+          <div className="profile__buttons">
+            <Button className="button_type_profile" type="submit">
+              Редактировать
+            </Button>
+            <Button className="button_type_profile button_type_red-text">
+              Выйти из аккаунта
+            </Button>
+          </div>
         </form>
-        <div className="profile__buttons">
-          <Button className="button_type_profile">Редактировать</Button>
-          <Button className="button_type_profile button_type_red-text">
-            Выйти из аккаунта
-          </Button>
-        </div>
       </div>
     </section>
   );

@@ -66,3 +66,24 @@
 .unauth-page__link:hover {
   color: #3ddc84;
 }
+
+.input__field_type_unauth {
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.input__field_type_unauth:focus-within {
+  border: 1px solid #3ddc84;
+  height: 45px;
+  box-sizing: border-box;
+}
+
+.unauth-page__logo {
+  margin-bottom: 36px;
+}
+
+@media (max-width: 500px) {
+  .unauth-page__logo {
+    margin-bottom: 45px;
+  }
+}
