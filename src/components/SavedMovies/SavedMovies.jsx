@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
 import Container from "../Container/Container";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
+import savedPageContext from "../../context/saved-page-context";
 import "./SavedMovies.css";
 
 const savedMovies = [
@@ -32,6 +33,9 @@ const savedMovies = [
 ];
 
 function SavedMovies() {
+  const { onSavedPage, setOnSavedPage } = useContext(savedPageContext);
+  useEffect(() => setOnSavedPage(true), [setOnSavedPage]);
+
   return (
     <div className="saved-movies-page">
       <Header />
@@ -41,11 +45,7 @@ function SavedMovies() {
           aria-label="Сохраненные фильмы"
         >
           <SearchForm />
-          <MoviesCardList
-            data={savedMovies}
-            modifier="movies-page__movies-list_type_saved"
-            onSavedPage
-          />
+          <MoviesCardList data={savedMovies} onSavedPage={onSavedPage} />
         </section>
       </Container>
       <Footer />

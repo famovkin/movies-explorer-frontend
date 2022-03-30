@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import Button from "../Button/Button";
 import Icons from "../Icons";
+import savedPageContext from "../../context/saved-page-context";
 import "./MoviesCard.css";
 
-function MoviesCard({ title, duration, imageUrl, onSavedPage }) {
+function MoviesCard({ title, duration, imageUrl }) {
+  const { onSavedPage } = useContext(savedPageContext);
   const [isSaved, setIsSaved] = useState(false);
 
   const handleSave = () => setIsSaved(!isSaved);
