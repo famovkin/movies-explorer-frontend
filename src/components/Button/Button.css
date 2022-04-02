@@ -37,6 +37,11 @@
   margin-bottom: 18px;
 }
 
+.button_type_disabled {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
 @media (max-width: 500px) {
   .button_type_submit {
     font-size: 12px;
