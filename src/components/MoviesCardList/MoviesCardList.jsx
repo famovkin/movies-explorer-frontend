@@ -13,7 +13,7 @@ function MoviesCardList({ data, onSavedPage }) {
       }`}
     >
       {data.map((movie) => (
-        <MoviesCard key={movie.id} {...movie} />
+        <MoviesCard key={movie.id} imageUrl={movie.image.url} link={movie.trailerLink} {...movie} />
       ))}
     </ul>
   );

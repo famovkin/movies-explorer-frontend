@@ -33,6 +33,10 @@
   font-size: 15px;
   font-weight: 500;
   line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  flex-basis: 200px;
 }
 
 @media (max-width: 500px) {
