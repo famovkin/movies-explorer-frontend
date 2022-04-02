@@ -11,21 +11,38 @@ import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import savedPageContext from "../../context/saved-page-context";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import currentUserContext from "../../context/currentUserContext";
+import { mainApi } from "../../utils/MainApi";
 import * as auth from "../../utils/auth";
 
 function App() {
   const [onSavedPage, setOnSavedPage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const history = useHistory();
+  const [currentUser, setCurrentUser] = useState({
+    name: "",
+    email: "",
+  });
   const token = localStorage.getItem("token");
+  const history = useHistory();
 
   useEffect(() => {
     if (token) {
       setIsLoggedIn(true);
       history.push("/movies");
     }
-  }, [history, setIsLoggedIn, token]);
+  }, [token, isLoggedIn, history]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      mainApi
+        .getCurrentUserInfo(token)
+        .then(([response]) => {
+          setCurrentUser(response);
+        })
+        .catch((e) => console.log(e));
+    }
+  }, [token, isLoggedIn]);
 
   function registerUser(name, email, password) {
     setIsLoading(true);
@@ -68,44 +85,46 @@ function App() {
   }
 
   return (
-    <savedPageContext.Provider value={{ onSavedPage, setOnSavedPage }}>
-      <div className="app">
-        <Switch>
-          <Route exact path="/">
-            <Main />
-          </Route>
-          <ProtectedRoute
-            component={Movies}
-            isLoggedIn={isLoggedIn}
-            exact
-            path="/movies"
-          />
-          <ProtectedRoute
-            component={SavedMovies}
-            isLoggedIn={isLoggedIn}
-            exact
-            path="/saved-movies"
-          />
-          <ProtectedRoute
-            component={Profile}
-            isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
-            exact
-            path="/profile"
-          />
-          <Route path="/signup">
-            <Register submitHandler={registerUser} isLoading={isLoading} />
-          </Route>
-          <Route path="/signin">
-            <Login submitHandler={loginUser} isLoading={isLoading} />
-          </Route>
-          <Route>
-            <NotFound path="/404" />
-          </Route>
-          <Redirect to="/404" />
-        </Switch>
-      </div>
-    </savedPageContext.Provider>
+    <currentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+      <savedPageContext.Provider value={{ onSavedPage, setOnSavedPage }}>
+        <div className="app">
+          <Switch>
+            <Route exact path="/">
+              <Main />
+            </Route>
+            <ProtectedRoute
+              component={Movies}
+              isLoggedIn={isLoggedIn}
+              exact
+              path="/movies"
+            />
+            <ProtectedRoute
+              component={SavedMovies}
+              isLoggedIn={isLoggedIn}
+              exact
+              path="/saved-movies"
+            />
+            <ProtectedRoute
+              component={Profile}
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+              exact
+              path="/profile"
+            />
+            <Route path="/signup">
+              <Register submitHandler={registerUser} isLoading={isLoading} />
+            </Route>
+            <Route path="/signin">
+              <Login submitHandler={loginUser} isLoading={isLoading} />
+            </Route>
+            <Route>
+              <NotFound path="/404" />
+            </Route>
+            <Redirect to="/404" />
+          </Switch>
+        </div>
+      </savedPageContext.Provider>
+    </currentUserContext.Provider>
   );
 }
 
