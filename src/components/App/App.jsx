@@ -10,26 +10,41 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import savedPageContext from "../../context/saved-page-context";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [onSavedPage, setOnSavedPage] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <savedPageContext.Provider value={{ onSavedPage, setOnSavedPage }}>
       <div className="app">
         <Switch>
-          <Route exact path="/">
-            <Main />
-          </Route>
-          <Route path="/movies">
-            <Movies />
-          </Route>
-          <Route path="/saved-movies">
-            <SavedMovies />
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
+          <ProtectedRoute
+            component={Main}
+            isLoggedIn={isLoggedIn}
+            exact
+            path="/"
+          />
+          <ProtectedRoute
+            component={Movies}
+            isLoggedIn={isLoggedIn}
+            exact
+            path="/movies"
+          />
+          <ProtectedRoute
+            component={SavedMovies}
+            isLoggedIn={isLoggedIn}
+            exact
+            path="/saved-movies"
+          />
+          <ProtectedRoute
+            component={Profile}
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            exact
+            path="/profile"
+          />
           <Route path="/signup">
             <Register />
           </Route>
