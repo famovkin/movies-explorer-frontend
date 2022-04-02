@@ -16,13 +16,13 @@
 
 .search-form__string {
   border-bottom: 1px solid #424242;
-  margin-bottom: 29px;
+  margin-bottom: 5px;
   position: relative;
 }
 
 @media (max-width: 500px) {
   .search-form__string {
-    margin-bottom: 43px;
+    margin-bottom: 5px;
   }
 }
 
@@ -129,4 +129,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.search-form__error {
+  display: block;
+  height: 18px;
+  font-size: 14px;
+  line-height: 1.28;
+  text-align: center;
+  color: #f00;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 500px) {
+  .search-form__error {
+    font-size: 11px;
+    line-height: 1.63;
+    margin-bottom: 22px;
+  }
 }

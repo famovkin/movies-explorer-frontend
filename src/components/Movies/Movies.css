@@ -41,3 +41,11 @@
     width: 240px;
   }
 }
+
+.movies__message {
+  margin: 0;
+  text-align: center;
+  height: 80px;
+  font-size: 25px;
+  font-weight: 500;
+}
