@@ -11,10 +11,35 @@ import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import savedPageContext from "../../context/saved-page-context";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import * as auth from "../../utils/auth";
 
 function App() {
   const [onSavedPage, setOnSavedPage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  function registerUser(name, email, password) {
+    setIsLoading(true);
+    auth
+      .register(name, email, password)
+      .then((res) => {
+        if (res) {
+          // автологин
+          // setIsSuccessReg(true);
+        } else {
+          console.log("Что-то пошло не так");
+          // setIsSuccessReg(false);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+        // setIsSuccessReg(false);
+      })
+      .finally(() => {
+        // setIsInfoToolTipOpen(true);
+        setIsLoading(false);
+      });
+  }
 
   return (
     <savedPageContext.Provider value={{ onSavedPage, setOnSavedPage }}>
@@ -46,7 +71,7 @@ function App() {
             path="/profile"
           />
           <Route path="/signup">
-            <Register />
+            <Register submitHandler={registerUser} isLoading={isLoading} />
           </Route>
           <Route path="/signin">
             <Login />
