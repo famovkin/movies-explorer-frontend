@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import Header from "../Header/Header";
@@ -10,8 +10,16 @@ import "./Profile.css";
 
 function Profile({ setIsLoggedIn, submitHandler }) {
   const { currentUser, setCurrentUser } = useContext(currentUserContext);
-  const { values, errors, isFormValid, handleChange } = useBrowserValidation();
+  const { values, errors, isFormValid, handleChange, setValues } =
+    useBrowserValidation();
   const history = useHistory();
+
+  useEffect(() => {
+    setValues({
+      name: currentUser.name,
+      email: currentUser.email,
+    });
+  }, [currentUser.name, currentUser.email, setValues]);
 
   const signOut = () => {
     localStorage.removeItem("token");
