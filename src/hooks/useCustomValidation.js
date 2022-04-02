@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function useFormAndValidation() {
+export const useCustomValidation = () => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
@@ -38,5 +38,3 @@ export function useFormAndValidation() {
     isFormValid,
   };
 }
-
-export default useFormAndValidation;

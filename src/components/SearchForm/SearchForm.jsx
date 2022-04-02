@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "../Button/Button";
-import useCustomValidation from "../../hooks/useCustomValidation";
+import { useCustomValidation } from "../../hooks/useCustomValidation";
 import { beatFilmApi } from "../../utils/MoviesApi";
 
 import Icons from "../Icons";
