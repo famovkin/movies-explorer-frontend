@@ -71,12 +71,9 @@ function App() {
     <savedPageContext.Provider value={{ onSavedPage, setOnSavedPage }}>
       <div className="app">
         <Switch>
-          <ProtectedRoute
-            component={Main}
-            isLoggedIn={isLoggedIn}
-            exact
-            path="/"
-          />
+          <Route exact path="/">
+            <Main />
+          </Route>
           <ProtectedRoute
             component={Movies}
             isLoggedIn={isLoggedIn}
