@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 import Icons from "../Icons";
@@ -7,14 +7,21 @@ import Container from "../Container/Container";
 import AccountButton from "../AccountButton/AccountButton";
 import Sidebar from "../Sidebar/Sidebar";
 import Logo from "../Logo/Logo";
-
+import currentUserContext from "../../context/currentUserContext";
 import "./Header.css";
 
 function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const isAuth = false; // для смены кнопок
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const {currentUser, setCurrentUser} = useContext(currentUserContext);
 
   const sidebarHandler = () => setIsSidebarOpen(!isSidebarOpen);
+
+  useEffect(() => {
+    currentUser.name === ""
+      ? setIsLoggedIn(false)
+      : setIsLoggedIn(true);
+    }, [currentUser.name])
 
   return (
     <Container>
@@ -41,7 +48,7 @@ function Header() {
           </div>
         </nav>
         <div className="header__account-menu">
-          {isAuth ? (
+          {isLoggedIn ? (
             <Link className="header__linked-button" to="/profile">
               <AccountButton modifier="button_type_hidden" />
             </Link>
@@ -60,7 +67,7 @@ function Header() {
             </>
           )}
         </div>
-        {isAuth && (
+        {isLoggedIn && (
           <Icons.Burger
             className="header__burger-icon"
             handler={sidebarHandler}
