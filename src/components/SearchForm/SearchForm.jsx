@@ -1,53 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "../Button/Button";
 import { useCustomValidation } from "../../hooks/useCustomValidation";
-import { beatFilmApi } from "../../utils/MoviesApi";
 
 import Icons from "../Icons";
 import "./SearchForm.css";
 
-function SearchForm({ setMovies, setIsLoading, onSavedPage }) {
+function SearchForm({ checkboxHandler, submitHandler }) {
   const [errorText, setErrorText] = useState("");
+  const [shortFilmsCheck, setShortFilmsCheck] = useState(false);
   const { values, setValues, errors, handleChange, isFormValid } =
     useCustomValidation();
-  const dataFromStorage = localStorage.getItem("queryData");
 
-  useEffect(() => {
-    if (dataFromStorage && onSavedPage) {
-      const query = JSON.parse(dataFromStorage).searchQuery;
-      setValues({ ...values, ["film-query"]: query });
-    }
-  }, [dataFromStorage, setValues, onSavedPage, values]);
+  const onClickCheckBox = () => {
+    setShortFilmsCheck(!shortFilmsCheck);
+    checkboxHandler(shortFilmsCheck);
+  }
 
-  const filterMovies = async (searchQuery) => {
-    setIsLoading(true);
-    const movies = await beatFilmApi
-      .getMovies()
-      .then((data) => data)
-      .catch((e) => console.log(e))
-      .finally(() => setIsLoading(false));
-
-    const filteredMovies = movies.filter((movie) =>
-      movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setMovies(filteredMovies);
-
-    const queryData = {
-      searchQuery,
-      filteredMovies,
-    };
-    localStorage.setItem("queryData", JSON.stringify(queryData));
-  };
-
-  const handleSubmitFrom = (e) => {
+  const onSubmitForm = async (e) => {
     e.preventDefault();
     if (values["film-query"] === undefined) {
       setErrorText("Запрос не может быть пустым");
       return;
     }
     if (isFormValid) {
-      console.log("Запрос на сервер");
-      filterMovies(values["film-query"]);
+      submitHandler(shortFilmsCheck, values["film-query"]);
     }
     setErrorText(errors["film-query"]);
   };
@@ -56,7 +32,7 @@ function SearchForm({ setMovies, setIsLoading, onSavedPage }) {
     <form
       className="search-form app__search-form"
       name="search-movie"
-      onSubmit={handleSubmitFrom}
+      onSubmit={onSubmitForm}
       noValidate
     >
       <div className="search-form__string">
@@ -69,6 +45,7 @@ function SearchForm({ setMovies, setIsLoading, onSavedPage }) {
           required
           onChange={handleChange}
           value={values["film-query"] || ""}
+          autoComplete="off"
         />
         <Button
           className="button button_type_search button_type_blue"
@@ -85,6 +62,8 @@ function SearchForm({ setMovies, setIsLoading, onSavedPage }) {
           name="short-film-option"
           id="short-film"
           value="short-film"
+          checked={shortFilmsCheck}
+          onChange={onClickCheckBox}
         />
         <div className="search-form__pseudo-item">
           <span className="search-form__circle"></span>

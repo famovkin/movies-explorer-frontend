@@ -8,6 +8,8 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 import savedPageContext from "../../context/saved-page-context";
 import Preloader from "../Preloader/Preloader";
+import { findOnlyShortMovies, filterMovies } from "../../utils/filters";
+import { beatFilmApi } from "../../utils/MoviesApi";
 
 import "./Movies.css";
 
@@ -19,10 +21,50 @@ function Movies() {
   useEffect(() => setOnSavedPage(false), [setOnSavedPage]);
 
   useEffect(() => {
-    if (queryData) {
+    if (queryData !== null) {
       setMovies(JSON.parse(queryData).filteredMovies);
+      // setValues({
+      //   ...values,
+      //   ["film-query"]: JSON.parse(queryData).searchQuery,
+      // });
     }
-  }, [queryData]);
+  }, [setMovies]);
+
+  const checkboxHandler = (isOnlyShortFilms) => {
+    if (queryData !== null) {
+      const moviesFromStorage = JSON.parse(queryData).filteredMovies;
+      if (isOnlyShortFilms) {
+        setMovies(moviesFromStorage);
+      } else {
+        setMovies(findOnlyShortMovies(moviesFromStorage));
+      }
+    }
+    return;
+  };
+
+  const submitHandler = async (isOnlyShortFilms, searchQuery) => {
+    try {
+      setIsLoading(true);
+      const allMovies = await beatFilmApi.getMovies();
+      const filteredMovies = await filterMovies(searchQuery, allMovies);
+      const filteredShortMovies = findOnlyShortMovies(filteredMovies);
+      const queryData = {
+        allMovies,
+        searchQuery: searchQuery,
+        filteredMovies,
+      };
+      localStorage.setItem("queryData", JSON.stringify(queryData));
+
+      isOnlyShortFilms
+        ? setMovies(filteredShortMovies)
+        : setMovies(filteredMovies);
+
+      setIsLoading(false);
+    } catch (e) {
+      console.log(e);
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="movies-page">
@@ -30,12 +72,11 @@ function Movies() {
       <Container>
         <section className="movies movies-page__movies" aria-label="Фильмы">
           <SearchForm
-            setMovies={setMovies}
-            setIsLoading={setIsLoading}
-            onSavedPage={onSavedPage}
+            checkboxHandler={checkboxHandler}
+            submitHandler={submitHandler}
           />
           {isLoading ? <Preloader /> : <MoviesCardList data={movies} />}
-          {!isLoading && movies && (
+          {!isLoading && movies.length === 0 && (
             <p className="movies__message">Ничего не найдено</p>
           )}
           {/* <div className="movies__footer">
