@@ -5,10 +5,12 @@ import Header from "../Header/Header";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import currentUserContext from "../../context/currentUserContext";
+import { useBrowserValidation } from "../../hooks/useBrowserValidation";
 import "./Profile.css";
 
-function Profile({ setIsLoggedIn }) {
-  const {currentUser, setCurrentUser} = useContext(currentUserContext);
+function Profile({ setIsLoggedIn, submitHandler }) {
+  const { currentUser, setCurrentUser } = useContext(currentUserContext);
+  const { values, errors, isFormValid, handleChange } = useBrowserValidation();
   const history = useHistory();
 
   const signOut = () => {
@@ -18,7 +20,12 @@ function Profile({ setIsLoggedIn }) {
     setCurrentUser({
       name: "",
       email: "",
-    })
+    });
+  };
+
+  const onSubmitForm = (e) => {
+    e.preventDefault();
+    submitHandler({ name: values["name"], email: values["email"] });
   };
 
   return (
@@ -26,7 +33,7 @@ function Profile({ setIsLoggedIn }) {
       <Header />
       <div className="profile__container">
         <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
-        <form className="profile__form">
+        <form className="profile__form" onSubmit={onSubmitForm} noValidate>
           <fieldset className="profile__inputs">
             <Input
               name="name"
@@ -34,6 +41,12 @@ function Profile({ setIsLoggedIn }) {
               modifier="profile"
               type="text"
               required
+              minLength="2"
+              maxLength="30"
+              onChange={handleChange}
+              value={values["name"] || ""}
+              error={errors["name"]}
+              autoComplete="off"
             />
             <Input
               name="email"
@@ -41,10 +54,20 @@ function Profile({ setIsLoggedIn }) {
               modifier="profile"
               type="email"
               required
+              onChange={handleChange}
+              value={values["email"] || ""}
+              error={errors["email"]}
+              autoComplete="off"
             />
           </fieldset>
           <div className="profile__buttons">
-            <Button className="button_type_profile" type="submit">
+            <Button
+              className={`button_type_profile ${
+                !isFormValid && "button_type_disabled"
+              }`}
+              type="submit"
+              isFormValid={isFormValid}
+            >
               Редактировать
             </Button>
             <Button

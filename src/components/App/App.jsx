@@ -84,6 +84,20 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
+  function updateUserInfo(userDataFromForm) {
+    setIsLoading(true);
+    mainApi
+      .editCurrentUserInfo(userDataFromForm, token)
+      .then((userDataUpdated) => {
+        setCurrentUser({
+          name: userDataUpdated.name,
+          email: userDataUpdated.email,
+        });
+      })
+      .catch((e) => console.log(e))
+      .finally(() => setIsLoading(false));
+  }
+
   return (
     <currentUserContext.Provider value={{ currentUser, setCurrentUser }}>
       <savedPageContext.Provider value={{ onSavedPage, setOnSavedPage }}>
@@ -110,6 +124,7 @@ function App() {
               setIsLoggedIn={setIsLoggedIn}
               exact
               path="/profile"
+              submitHandler={updateUserInfo}
             />
             <Route path="/signup">
               <Register submitHandler={registerUser} isLoading={isLoading} />
