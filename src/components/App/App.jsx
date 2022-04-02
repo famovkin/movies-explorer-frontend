@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 
 import "./App.css";
@@ -18,6 +18,14 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const history = useHistory();
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (token) {
+      setIsLoggedIn(true);
+      history.push("/movies");
+    }
+  }, [history, setIsLoggedIn, token]);
 
   function registerUser(name, email, password) {
     setIsLoading(true);
