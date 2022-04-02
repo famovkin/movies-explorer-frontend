@@ -1,25 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import Header from "../Header/Header";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
-import { useHistory } from "react-router-dom";
+import currentUserContext from "../../context/currentUserContext";
 import "./Profile.css";
 
 function Profile({ setIsLoggedIn }) {
+  const {currentUser, setCurrentUser} = useContext(currentUserContext);
   const history = useHistory();
 
   const signOut = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     history.push("/signin");
+    setCurrentUser({
+      name: "",
+      email: "",
+    })
   };
 
   return (
     <section className="profile">
       <Header />
       <div className="profile__container">
-        <h2 className="profile__title">Привет, Виталий!</h2>
+        <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
         <form className="profile__form">
           <fieldset className="profile__inputs">
             <Input
