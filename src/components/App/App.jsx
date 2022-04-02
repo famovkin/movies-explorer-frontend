@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 
 import "./App.css";
 import Main from "../Main/Main";
@@ -17,6 +17,7 @@ function App() {
   const [onSavedPage, setOnSavedPage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const history = useHistory();
 
   function registerUser(name, email, password) {
     setIsLoading(true);
@@ -24,7 +25,7 @@ function App() {
       .register(name, email, password)
       .then((res) => {
         if (res) {
-          // автологин
+          loginUser(email, password);
           // setIsSuccessReg(true);
         } else {
           console.log("Что-то пошло не так");
@@ -39,6 +40,23 @@ function App() {
         // setIsInfoToolTipOpen(true);
         setIsLoading(false);
       });
+  }
+
+  function loginUser(email, password) {
+    setIsLoading(true);
+    auth
+      .authorize(email, password)
+      .then((data) => {
+        if (data.token) {
+          setIsLoggedIn(true);
+          history.push("/movies");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+        setIsLoggedIn(false);
+      })
+      .finally(() => setIsLoading(false));
   }
 
   return (
@@ -74,7 +92,7 @@ function App() {
             <Register submitHandler={registerUser} isLoading={isLoading} />
           </Route>
           <Route path="/signin">
-            <Login />
+            <Login submitHandler={loginUser} isLoading={isLoading} />
           </Route>
           <Route>
             <NotFound path="/404" />
