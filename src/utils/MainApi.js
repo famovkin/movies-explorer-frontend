@@ -34,6 +34,16 @@ class Api {
       headers: { ...this._headers, Authorization: `Bearer ${token}` },
     }).then((res) => this._checkServerResponse(res));
   }
+
+  createMovie(movieInfo, token) {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: "POST",
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
+      body: JSON.stringify({
+        ...movieInfo
+      }),
+    }).then((res) => this._checkServerResponse(res));
+  }
 }
 
 export const mainApi = new Api({
