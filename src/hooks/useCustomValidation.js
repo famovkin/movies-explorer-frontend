@@ -20,7 +20,7 @@ export const UseCustomValidation = () => {
         } else if (!new RegExp(/^[а-яА-ЯёЁa-zA-Z]+$/).test(value)) {
           setErrors({ ...errors, [name]: "Нужно ввести ключевое слово" });
         } else {
-          const newErrors = deleteKeyFromObj(errors, [name]);
+          const newErrors = deleteKeyFromObj(errors, name);
           setErrors(newErrors);
         }
         break;
@@ -33,7 +33,7 @@ export const UseCustomValidation = () => {
             [name]: "Используйте буквы, дефис или пробел",
           });
         } else {
-          const newErrors = deleteKeyFromObj(errors, [name]);
+          const newErrors = deleteKeyFromObj(errors, name);
           setErrors(newErrors);
         }
         break;
@@ -46,7 +46,7 @@ export const UseCustomValidation = () => {
             [name]: "Некорректный адрес электронной почты",
           });
         } else {
-          const newObjErrors = deleteKeyFromObj(errors, [name]);
+          const newObjErrors = deleteKeyFromObj(errors, name);
           setErrors(newObjErrors);
         }
         break;
@@ -59,7 +59,7 @@ export const UseCustomValidation = () => {
             [name]: "Минимальная длина пароля — 8 символов",
           });
         } else {
-          const newObj = deleteKeyFromObj(errors, [name]);
+          const newObj = deleteKeyFromObj(errors, name);
           setErrors(newObj);
         }
         break;
