@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Input.css";
 
-function Input({ name, label, error, modifier, ...rest }) {
+function Input({ name, label, error, modifier, ...props }) {
   return (
     <>
       <div className={`input app__input input_type_${modifier}`}>
@@ -16,7 +16,7 @@ function Input({ name, label, error, modifier, ...rest }) {
           className={`input__field input__field_type_${modifier}`}
           id={name}
           name={name}
-          {...rest}
+          {...props}
         />
       </div>
       <span className={`input__error input__error_type_${modifier}`}>
