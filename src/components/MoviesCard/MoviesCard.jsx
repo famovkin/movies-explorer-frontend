@@ -6,12 +6,28 @@ import savedPageContext from "../../context/saved-page-context";
 import { getCorrectDuration } from "../../utils/getCorrectDuration";
 import "./MoviesCard.css";
 
-function MoviesCard(props) {
+function MoviesCard({ onSaveHandler, ...props }) {
   const { onSavedPage } = useContext(savedPageContext);
   const [isSaved, setIsSaved] = useState(false);
   const SERVER_URL = "https://api.nomoreparties.co/";
 
-  const handleSave = () => setIsSaved(!isSaved);
+  const handleSave = () => {
+    const movieData = {
+      country: props.country,
+      director: props.director,
+      duration: props.duration,
+      year: props.year,
+      description: props.description,
+      image: SERVER_URL + props.image.url,
+      trailerLink: props.trailerLink,
+      nameRU: props.nameRU,
+      nameEN: props.nameEN,
+      thumbnail: SERVER_URL + props.image.formats.thumbnail.url,
+      movieId: props.id,
+    };
+  onSaveHandler(movieData, setIsSaved);
+  };
+
   const handleDelete = () => console.log("Удаление карточки");
 
   return (

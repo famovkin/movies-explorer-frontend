@@ -90,6 +90,13 @@ function Movies({ savedMovies, setSavedMovies }) {
     </Button>
   );
 
+  const saveMovie = (movie, likeHandler) => {
+    mainApi
+      .createMovie(movie, token)
+      .then(() => likeHandler(true))
+      .catch((e) => console.log(e));
+  };
+
   return (
     <div className="movies-page">
       <Header />
@@ -102,7 +109,7 @@ function Movies({ savedMovies, setSavedMovies }) {
           />
           {isLoading
             ? <Preloader />
-            : <MoviesCardList data={movies} />}
+            : <MoviesCardList data={movies} onSaveHandler={saveMovie} />}
           {!isLoading && movies.length === 0 && (
             <p className="movies__message">Ничего не найдено</p>
           )}

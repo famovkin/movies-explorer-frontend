@@ -3,7 +3,7 @@ import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
 
-function MoviesCardList({ data, onSavedPage }) {
+function MoviesCardList({ data, onSavedPage, onSaveHandler }) {
   return (
     <ul
       className={`movies-list movies-page__movies-list
@@ -13,7 +13,7 @@ function MoviesCardList({ data, onSavedPage }) {
       }`}
     >
       {data && data.map((movie) => (
-        <MoviesCard key={movie._id || movie.id} {...movie} />
+        <MoviesCard key={movie._id || movie.id} onSaveHandler={onSaveHandler} {...movie} />
       ))}
     </ul>
   );
