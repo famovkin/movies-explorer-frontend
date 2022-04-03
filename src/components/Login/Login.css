@@ -1,0 +1,15 @@
+.login {
+  width: 100%;
+}
+
+.login__inputs {
+  margin: 0 0 159px;
+  padding: 0;
+  border: none;
+}
+
+@media (max-width: 500px) {
+  .login__inputs {
+    margin-bottom: 250px;
+  }
+}

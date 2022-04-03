@@ -1,0 +1,10 @@
+.result-block {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-block__title {
+  margin: 0;
+}

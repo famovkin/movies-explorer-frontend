@@ -1,0 +1,39 @@
+.about {
+  padding: 105px 0;
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: 85px 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .about {
+    padding: 67px 0 62px 4px;
+  }
+}
+
+.about__cards {
+  padding-top: 70px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 110px;
+}
+
+@media (max-width: 768px) {
+  .about__cards {
+    gap: 30px;
+    margin-bottom: 93px;
+  }
+}
+
+@media (max-width: 500px) {
+  .about__cards {
+    padding-top: 60px;
+    flex-direction: column;
+    gap: 56px;
+    margin-bottom: 60px;
+  }
+}

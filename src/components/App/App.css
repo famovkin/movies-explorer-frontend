@@ -1,0 +1,11 @@
+.app {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #202020;
+  color: #fff;
+}
+
+.app__input {
+  margin-bottom: 2px;
+}

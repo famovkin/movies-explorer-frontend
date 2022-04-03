@@ -1,0 +1,12 @@
+.saved-movies-page {
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+.saved-movies-page__movies {
+  margin-bottom: 80px;
+}
+
+.movies-page__movies-list_type_saved {
+  margin-bottom: 169px;
+}

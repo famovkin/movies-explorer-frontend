@@ -1,0 +1,27 @@
+.button_type_account {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.button__text_type_account {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.14;
+  color: #fff;
+}
+
+.button__icon_type_account {
+  background-color: #313131;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+  .button_type_hidden {
+    display: none;
+  }
+}

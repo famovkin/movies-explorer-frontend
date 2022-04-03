@@ -1,0 +1,204 @@
+.about-me {
+  padding: 110px 0 0;
+}
+
+@media (max-width: 786px) {
+  .about-me {
+    padding: 88px 0 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .about-me {
+    padding: 65px 0 0;
+  }
+}
+
+.main__about-me {
+  margin-bottom: 125px;
+}
+
+@media (max-width: 786px) {
+  .main__about-me {
+    margin-bottom: 90px;
+  }
+}
+
+@media (max-width: 500px) {
+  .main__about-me {
+    margin-bottom: 70px;
+  }
+}
+
+.about-me__student {
+  margin-bottom: 100px;
+}
+
+@media (max-width: 786px) {
+  .about-me__student {
+    margin-bottom: 90px;
+  }
+}
+
+@media (max-width: 500px) {
+  .about-me__student {
+    margin-bottom: 69px;
+  }
+}
+
+.student {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 66px;
+  gap: 49px;
+}
+
+@media (max-width: 768px) {
+  .student {
+    padding-top: 62px;
+    gap: 49px;
+  }
+}
+
+@media (max-width: 550px) {
+  .student {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 40px;
+  }
+}
+
+.student__information {
+  max-width: 600px;
+}
+
+@media (max-width: 550px) {
+  .student__information {
+    max-width: auto;
+  }
+}
+
+.student__name {
+  margin: 0;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 1.16;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 768px) {
+  .student__name {
+    font-size: 40px;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 500px) {
+  .student__name {
+    font-size: 30px;
+    line-height: 1.21;
+    margin-bottom: 20px;
+  }
+}
+
+.student__about {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.11;
+  margin-bottom: 26px;
+}
+
+@media (max-width: 768px) {
+  .student__about {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .student__about {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+}
+
+.student__description {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.57;
+  margin-bottom: 99px;
+}
+
+@media (max-width: 768px) {
+  .student__description {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 87px;
+  }
+}
+
+@media (max-width: 500px) {
+  .student__description {
+    font-size: 11px;
+    line-height: 1.45;
+    margin-bottom: 37px;
+  }
+}
+
+.student__photo {
+  width: 270px;
+  height: 327px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .student__photo {
+    width: 255px;
+    height: 307px;
+  }
+}
+
+@media (max-width: 500px) {
+  .student__photo {
+    width: 292px;
+    height: 352px;
+  }
+}
+
+.student__socials {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.portfolio__title {
+  margin: 0 0 50px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.11;
+  color: #8b8b8b;
+}
+
+@media (max-width: 500px) {
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 1.42;
+    margin-bottom: 40px;
+  }
+}
+
+.portfolio__projects {
+  margin: 0;
+  padding: 0;
+}
+
+.link__item_type_medium {
+  font-size: 14px;
+  font-weight: 500;
+}
