@@ -23,6 +23,7 @@ function App() {
     name: "",
     email: "",
   });
+  const [savedMovies, setSavedMovies] = useState([])
   const token = localStorage.getItem("token");
   const history = useHistory();
 
@@ -111,12 +112,16 @@ function App() {
               isLoggedIn={isLoggedIn}
               exact
               path="/movies"
+              savedMovies={savedMovies}
+              setSavedMovies={setSavedMovies}
             />
             <ProtectedRoute
               component={SavedMovies}
               isLoggedIn={isLoggedIn}
               exact
               path="/saved-movies"
+              savedMovies={savedMovies}
+              setSavedMovies={setSavedMovies}
             />
             <ProtectedRoute
               component={Profile}
