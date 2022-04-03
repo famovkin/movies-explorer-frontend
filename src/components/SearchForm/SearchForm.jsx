@@ -7,19 +7,15 @@ import { countInputs } from "../../utils/countInputs";
 import Icons from "../Icons";
 import "./SearchForm.css";
 
-function SearchForm({ checkboxHandler, submitHandler }) {
+function SearchForm({ submitHandler, checkbox, setCheckbox }) {
   const [errorText, setErrorText] = useState("");
-  const [shortFilmsCheck, setShortFilmsCheck] = useState(false);
   const { values, errors, handleChange, isFormValid, setIsFormValid } =
     UseCustomValidation();
   const amountInputs = countInputs(".search-form__input");
 
   UseCheckFormValidity(values, errors, amountInputs, setIsFormValid);
 
-  const onClickCheckBox = () => {
-    setShortFilmsCheck(!shortFilmsCheck);
-    checkboxHandler(shortFilmsCheck);
-  };
+  const onClickCheckBox = () => setCheckbox(!checkbox);
 
   const onSubmitForm = (e) => {
     e.preventDefault();
@@ -28,7 +24,7 @@ function SearchForm({ checkboxHandler, submitHandler }) {
       return;
     }
     if (isFormValid) {
-      submitHandler(shortFilmsCheck, values["film-query"]);
+      submitHandler(checkbox, values["film-query"]);
       setErrorText("");
     }
     setErrorText(errors["film-query"]);
@@ -68,7 +64,7 @@ function SearchForm({ checkboxHandler, submitHandler }) {
           name="short-film-option"
           id="short-film"
           value="short-film"
-          checked={shortFilmsCheck}
+          checked={checkbox}
           onChange={onClickCheckBox}
         />
         <div className="search-form__pseudo-item">
