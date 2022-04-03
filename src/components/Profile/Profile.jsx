@@ -35,7 +35,7 @@ function Profile({ setIsLoggedIn, submitHandler }) {
   const signOut = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-    history.push("/signin");
+    history.push("/");
     setCurrentUser({
       name: "",
       email: "",
