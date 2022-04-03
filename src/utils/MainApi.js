@@ -27,6 +27,13 @@ class Api {
       }),
     }).then((res) => this._checkServerResponse(res));
   }
+
+  getSavedMovies(token) {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: "GET",
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
+    }).then((res) => this._checkServerResponse(res));
+  }
 }
 
 export const mainApi = new Api({
