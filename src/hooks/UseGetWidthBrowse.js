@@ -5,7 +5,6 @@ export const UseGetWidthBrowser = () => {
   useLayoutEffect(() => {
     const getWidth = () => {
       setWidth(window.innerWidth);
-      console.log("debounced");
     };
 
     function debounce(func, ms) {
