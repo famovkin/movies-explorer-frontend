@@ -13,7 +13,7 @@ import "./Header.css";
 function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const {currentUser, setCurrentUser} = useContext(currentUserContext);
+  const { currentUser, setCurrentUser } = useContext(currentUserContext);
 
   const sidebarHandler = () => setIsSidebarOpen(!isSidebarOpen);
 
@@ -30,7 +30,9 @@ function Header() {
           <Link className="header__linked-logo" to="/">
             <Logo className="logo header__logo" />
           </Link>
-          <div className="header__links">
+          <div className={`header__links ${isLoggedIn
+            ? ""
+            : "header__links_type_hidden"}`}>
             <NavLink
               className="header__link"
               activeClassName="header__link_active"
