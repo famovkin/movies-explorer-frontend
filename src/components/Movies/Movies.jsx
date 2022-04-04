@@ -10,6 +10,7 @@ import savedPageContext from "../../context/saved-page-context";
 import Preloader from "../Preloader/Preloader";
 import { findOnlyShortMovies, filterMovies } from "../../utils/filters";
 import { beatFilmApi } from "../../utils/MoviesApi";
+import { getOneIdByAnother } from "../../utils/getOneIdByAnother";
 import { UseGetWidthBrowser } from "../../hooks/UseGetWidthBrowse";
 import { mainApi } from "../../utils/MainApi";
 import "./Movies.css";
@@ -26,13 +27,6 @@ function Movies({ savedMovies, setSavedMovies }) {
   const width = UseGetWidthBrowser();
   const queryData = localStorage.getItem("queryData");
   const token = localStorage.getItem("token");
-
-  useEffect(() => {
-    mainApi
-      .getSavedMovies(token)
-      .then((moviesData) => setSavedMovies(moviesData))
-      .catch((e) => console.log(e));
-  }, [token, setSavedMovies]);
 
   useEffect(() => setOnSavedPage(false), [setOnSavedPage]);
 
@@ -93,7 +87,21 @@ function Movies({ savedMovies, setSavedMovies }) {
   const saveMovie = (movie, likeHandler) => {
     mainApi
       .createMovie(movie, token)
-      .then(() => likeHandler(true))
+      .then((newMovie) => {
+        setSavedMovies([...savedMovies, newMovie]);
+        likeHandler(true);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const deleteMovie = (movieId, likeHandler) => {
+    const idInSavedMovies = getOneIdByAnother(movieId, savedMovies)
+    mainApi
+      .removeMovie(idInSavedMovies, token)
+      .then(() => {
+        likeHandler(false);
+        setSavedMovies((state) => state.filter((m) => m._id !== idInSavedMovies));
+      })
       .catch((e) => console.log(e));
   };
 
@@ -109,7 +117,12 @@ function Movies({ savedMovies, setSavedMovies }) {
           />
           {isLoading
             ? <Preloader />
-            : <MoviesCardList data={movies} onSaveHandler={saveMovie} />}
+            : <MoviesCardList
+                allMovies={movies}
+                onSaveHandler={saveMovie}
+                onDeleteHandler={deleteMovie}
+                savedMovies={savedMovies}
+              />}
           {!isLoading && movies.length === 0 && (
             <p className="movies__message">Ничего не найдено</p>
           )}

@@ -45,6 +45,16 @@ function App() {
     }
   }, [token, isLoggedIn]);
 
+  useEffect(() => {
+    mainApi
+      .getSavedMovies(token)
+      .then((moviesData) => {
+        const ownSavedMovies = moviesData.filter(movie => movie.owner === currentUser._id)
+        setSavedMovies(ownSavedMovies);
+      })
+      .catch((e) => console.log(e));
+  }, [currentUser._id, setSavedMovies, token]);
+
   function registerUser(name, email, password) {
     setIsLoading(true);
     auth

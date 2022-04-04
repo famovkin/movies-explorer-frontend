@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import Button from "../Button/Button";
 import Icons from "../Icons";
@@ -6,10 +6,16 @@ import savedPageContext from "../../context/saved-page-context";
 import { getCorrectDuration } from "../../utils/getCorrectDuration";
 import "./MoviesCard.css";
 
-function MoviesCard({ onSaveHandler, ...props }) {
+function MoviesCard({ savedMovies, onSaveHandler, onDeleteHandler, ...props }) {
   const { onSavedPage } = useContext(savedPageContext);
   const [isSaved, setIsSaved] = useState(false);
   const SERVER_URL = "https://api.nomoreparties.co/";
+
+  useEffect(() => {
+    if (savedMovies.some((movie) => movie.movieId === props.id)) {
+      setIsSaved(true);
+    }
+  }, [savedMovies, props.id])
 
   const handleSave = () => {
     const movieData = {
@@ -28,7 +34,9 @@ function MoviesCard({ onSaveHandler, ...props }) {
   onSaveHandler(movieData, setIsSaved);
   };
 
-  const handleDelete = () => console.log("Удаление карточки");
+  const handleDelete = () => {
+    onDeleteHandler(props._id || props.id, setIsSaved);
+  };
 
   return (
     <li className="movies-card">
@@ -54,9 +62,15 @@ function MoviesCard({ onSaveHandler, ...props }) {
       <div className="movies-card__footer">
         <Button
           className={`button_type_card ${
-            isSaved && !onSavedPage ? "button_type_red" : "button_type_gray"
+             isSaved && !onSavedPage
+              ? "button_type_red"
+              : "button_type_gray"
           }`}
-          handler={!onSavedPage ? handleSave : handleDelete}
+          handler={onSavedPage
+            ? handleDelete
+            : isSaved
+              ? handleDelete
+              : handleSave}
         >
           {onSavedPage
             ? (<Icons.Delete />)
