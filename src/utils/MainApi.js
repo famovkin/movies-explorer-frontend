@@ -40,8 +40,15 @@ class Api {
       method: "POST",
       headers: { ...this._headers, Authorization: `Bearer ${token}` },
       body: JSON.stringify({
-        ...movieInfo
+        ...movieInfo,
       }),
+    }).then((res) => this._checkServerResponse(res));
+  }
+
+  removeMovie(movieId, token) {
+    return fetch(`${this._baseUrl}/movies/${movieId}`, {
+      method: "DELETE",
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
     }).then((res) => this._checkServerResponse(res));
   }
 }
