@@ -15,8 +15,9 @@ import "./MoviesCardList.css";
             key={movie._id || movie.id}
             onSaveHandler={onSaveHandler}
             onDeleteHandler={onDeleteHandler}
+            savedMovies={savedMovies || allMovies}
+            onSavedPage={onSavedPage}
             {...movie}
-          savedMovies={savedMovies}
           />
         ))}
     </ul>

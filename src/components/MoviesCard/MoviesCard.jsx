@@ -1,13 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import Button from "../Button/Button";
 import Icons from "../Icons";
-import savedPageContext from "../../context/saved-page-context";
 import { getCorrectDuration } from "../../utils/getCorrectDuration";
 import "./MoviesCard.css";
 
-function MoviesCard({ savedMovies, onSaveHandler, onDeleteHandler, ...props }) {
-  const { onSavedPage } = useContext(savedPageContext);
+function MoviesCard({ onSavedPage, savedMovies, onSaveHandler, onDeleteHandler, ...props }) {
   const [isSaved, setIsSaved] = useState(false);
   const SERVER_URL = "https://api.nomoreparties.co/";
 

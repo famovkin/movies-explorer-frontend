@@ -1,19 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 
 import Container from "../Container/Container";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
-import savedPageContext from "../../context/saved-page-context";
 import { mainApi } from "../../utils/MainApi";
 import "./SavedMovies.css";
 
-function SavedMovies({ savedMovies, setSavedMovies }) {
-  const { onSavedPage, setOnSavedPage } = useContext(savedPageContext);
+function SavedMovies({ savedMovies, setSavedMovies, onDeleteHandler }) {
   const token = localStorage.getItem("token");
-
-  useEffect(() => setOnSavedPage(true), [setOnSavedPage]);
 
   const deleteMovie = (movieId, likeHandler) => {
     mainApi
@@ -37,9 +33,8 @@ function SavedMovies({ savedMovies, setSavedMovies }) {
           {savedMovies && (
             <MoviesCardList
               allMovies={savedMovies}
-              onSavedPage={true}
               onDeleteHandler={deleteMovie}
-              savedMovies={savedMovies}
+              onSavedPage={true}
             />
           )}
           {savedMovies.length === 0 && (

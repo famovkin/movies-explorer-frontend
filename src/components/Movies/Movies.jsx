@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -6,7 +6,6 @@ import Container from "../Container/Container";
 import Button from "../Button/Button";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
-import savedPageContext from "../../context/saved-page-context";
 import Preloader from "../Preloader/Preloader";
 import { findOnlyShortMovies, filterMovies } from "../../utils/filters";
 import { beatFilmApi } from "../../utils/MoviesApi";
@@ -16,7 +15,6 @@ import { mainApi } from "../../utils/MainApi";
 import "./Movies.css";
 
 function Movies({ savedMovies, setSavedMovies }) {
-  const { onSavedPage, setOnSavedPage } = useContext(savedPageContext);
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [initialCardsAmount, setInitialCards] = useState(0); // первоначальное кол-во карточек
@@ -27,8 +25,6 @@ function Movies({ savedMovies, setSavedMovies }) {
   const width = UseGetWidthBrowser();
   const queryData = localStorage.getItem("queryData");
   const token = localStorage.getItem("token");
-
-  useEffect(() => setOnSavedPage(false), [setOnSavedPage]);
 
   useEffect(() => {
     if (width >= 1280) {
@@ -119,9 +115,10 @@ function Movies({ savedMovies, setSavedMovies }) {
             ? <Preloader />
             : <MoviesCardList
                 allMovies={movies}
+                savedMovies={savedMovies}
                 onSaveHandler={saveMovie}
                 onDeleteHandler={deleteMovie}
-                savedMovies={savedMovies}
+                onSavedPage={false}
               />}
           {!isLoading && movies.length === 0 && (
             <p className="movies__message">Ничего не найдено</p>
