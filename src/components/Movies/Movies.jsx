@@ -21,6 +21,7 @@ function Movies({ savedMovies, setSavedMovies }) {
   const [cardsPage, setCardsPage] = useState(0); // открытые страницы
   const [cardsInBundle, setCardsInBundle] = useState(0); // карточек в след. порции
   const [shortFilmsCheck, setShortFilmsCheck] = useState(false);
+  const [lastSearchQuery, setLastSearchQuery] = useState("");
   const cardsCount = initialCardsAmount + cardsInBundle * cardsPage;
   const width = UseGetWidthBrowser();
   const queryData = localStorage.getItem("queryData");
@@ -43,6 +44,13 @@ function Movies({ savedMovies, setSavedMovies }) {
   let filteredShortMovies = JSON.parse(queryData)?.filteredShortMovies || [];
 
   useEffect(() => {
+    if (queryData) {
+      setLastSearchQuery(JSON.parse(queryData)?.searchQuery);
+      setShortFilmsCheck(JSON.parse(queryData)?.isOnlyShortFilms);
+    }
+  }, [queryData])
+
+  useEffect(() => {
     shortFilmsCheck
       ? setMovies(filteredShortMovies.slice(0, cardsCount))
       : setMovies(filteredMovies.slice(0, cardsCount));
@@ -55,9 +63,10 @@ function Movies({ savedMovies, setSavedMovies }) {
       filteredMovies = await filterMovies(searchQuery, allMovies);
       filteredShortMovies = findOnlyShortMovies(filteredMovies);
       const queryData = {
-        allMovies,
         filteredMovies,
         filteredShortMovies,
+        searchQuery,
+        isOnlyShortFilms,
       };
       localStorage.setItem("queryData", JSON.stringify(queryData));
 
@@ -110,6 +119,7 @@ function Movies({ savedMovies, setSavedMovies }) {
             submitHandler={submitHandler}
             checkbox={shortFilmsCheck}
             setCheckbox={setShortFilmsCheck}
+            lastSearchQuery={lastSearchQuery}
           />
           {isLoading
             ? <Preloader />

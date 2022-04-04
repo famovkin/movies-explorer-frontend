@@ -1,19 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
 import Button from "../Button/Button";
 import { UseCustomValidation } from "../../hooks/UseCustomValidation";
 import { UseCheckFormValidity } from "../../hooks/UseCheckFormValidity";
 import { countInputs } from "../../utils/countInputs";
-
 import Icons from "../Icons";
 import "./SearchForm.css";
 
-function SearchForm({ submitHandler, checkbox, setCheckbox }) {
+function SearchForm({ submitHandler, checkbox, setCheckbox, lastSearchQuery }) {
   const [errorText, setErrorText] = useState("");
-  const { values, errors, handleChange, isFormValid, setIsFormValid } =
-    UseCustomValidation();
+  const {
+    values,
+    errors,
+    setValues,
+    handleChange,
+    isFormValid,
+    setIsFormValid,
+  } = UseCustomValidation();
   const amountInputs = countInputs(".search-form__input");
 
   UseCheckFormValidity(values, errors, amountInputs, setIsFormValid);
+
+  useEffect(() => {
+    if (lastSearchQuery) {
+      setValues({ ...values, "film-query": lastSearchQuery });
+    }
+  }, [lastSearchQuery, setValues]);
 
   const onClickCheckBox = () => setCheckbox(!checkbox);
 
