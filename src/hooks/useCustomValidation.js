@@ -27,7 +27,18 @@ export const UseCustomValidation = () => {
       case "name":
         if (value.length === 0) {
           setRequiredError(name);
-        } else if (!new RegExp(/^[а-яА-ЯёЁa-zA-Z\s/-]+$/).test(value)) {
+        } else if (value.length < 2) {
+          setErrors({
+            ...errors,
+            [name]: "Минимальное количество символов — 2",
+          });
+        } else if (value.length >= 30) {
+          setErrors({
+            ...errors,
+            [name]: "Максимальное количество символов — 30",
+          });
+        }
+        else if (!new RegExp(/^[а-яА-ЯёЁa-zA-Z\s/-]+$/).test(value)) {
           setErrors({
             ...errors,
             [name]: "Используйте буквы, дефис или пробел",
