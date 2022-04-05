@@ -28,6 +28,7 @@ function App() {
     status: "",
   });
   const [savedMoviesMessage, setSavedMoviesMessage] = useState("");
+  const [unauthPageMessage, setUnauthPageMessage] = useState("")
   const token = localStorage.getItem("token");
   const history = useHistory();
 
@@ -72,20 +73,17 @@ function App() {
       .then((res) => {
         if (res) {
           loginUser(email, password);
-          // setIsSuccessReg(true);
-        } else {
-          console.log("Что-то пошло не так");
-          // setIsSuccessReg(false);
+          setUnauthPageMessage("");
         }
       })
-      .catch((e) => {
-        console.log(e);
-        // setIsSuccessReg(false);
+      .catch((e) => e.json())
+      .then((e) => {
+        if (e?.message) {
+          setUnauthPageMessage(e.message);
+        }
       })
-      .finally(() => {
-        // setIsInfoToolTipOpen(true);
-        setIsLoading(false);
-      });
+      .catch((e) => console.log(e))
+      .finally(() => setIsLoading(false));
   }
 
   function loginUser(email, password) {
@@ -96,12 +94,17 @@ function App() {
         if (data.token) {
           setIsLoggedIn(true);
           history.push("/movies");
+          setUnauthPageMessage("");
         }
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((e) => e.json())
+      .then((e) => {
+        if (e?.message) {
+          setUnauthPageMessage(e.message);
+        }
         setIsLoggedIn(false);
       })
+      .catch((e) => console.log(e))
       .finally(() => setIsLoading(false));
   }
 
@@ -159,10 +162,20 @@ function App() {
             isLoading={isLoading}
           />
           <Route path="/signup">
-            <Register submitHandler={registerUser} isLoading={isLoading} />
+            <Register
+              submitHandler={registerUser}
+              isLoading={isLoading}
+              message={unauthPageMessage}
+              setMessage={setUnauthPageMessage}
+            />
           </Route>
           <Route path="/signin">
-            <Login submitHandler={loginUser} isLoading={isLoading} />
+            <Login
+              submitHandler={loginUser}
+              isLoading={isLoading}
+              message={unauthPageMessage}
+              setMessage={setUnauthPageMessage}
+            />
           </Route>
           <Route>
             <NotFound path="/404" />

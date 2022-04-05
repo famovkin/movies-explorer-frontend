@@ -4,7 +4,7 @@ const checkServerResponse = (res) => {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(`Что-то пошло не так. Обратитесь к разработчику`);
+  return Promise.reject(res);
 };
 
 export const register = (name, email, password) => {

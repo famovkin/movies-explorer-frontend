@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import UnauthPage from "../UnauthPage/UnauthPage";
 import Input from "../Input/Input";
@@ -8,12 +8,14 @@ import { UseCheckFormValidity } from "../../hooks/UseCheckFormValidity";
 import { countInputs } from "../../utils/countInputs";
 import "./Login.css";
 
-function Login({ submitHandler, isLoading }) {
+function Login({ submitHandler, isLoading, message, setMessage }) {
   const { values, errors, handleChange, isFormValid, setIsFormValid } =
     UseCustomValidation();
   const amountInputs = countInputs(".input");
 
   UseCheckFormValidity(values, errors, amountInputs, setIsFormValid);
+
+  useEffect(() => setMessage(""), [setMessage]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -50,6 +52,13 @@ function Login({ submitHandler, isLoading }) {
             autoComplete="off"
           />
         </fieldset>
+        <p
+          className={`unauth-page__message ${
+            message ? "unauth-page__message_type_fail" : ""
+          }`}
+        >
+          {message}
+        </p>
         <Button
           className={`button_type_blue button_type_submit ${
             !isFormValid && "button_type_disabled"
