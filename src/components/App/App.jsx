@@ -50,6 +50,8 @@ function App() {
         const ownSavedMovies = moviesData.filter(
           (movie) => movie.owner === currentUser._id
         );
+
+        localStorage.setItem("savedMovies", JSON.stringify(ownSavedMovies));
         setSavedMovies(ownSavedMovies);
       })
       .catch((e) => console.log(e));

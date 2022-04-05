@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Container from "../Container/Container";
 import Footer from "../Footer/Footer";
@@ -6,10 +6,13 @@ import Header from "../Header/Header";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 import { mainApi } from "../../utils/MainApi";
+import { findOnlyShortMovies, filterMovies } from "../../utils/filters";
 import "./SavedMovies.css";
 
-function SavedMovies({ savedMovies, setSavedMovies, onDeleteHandler }) {
+function SavedMovies({ savedMovies, setSavedMovies }) {
+  const [shortFilmsCheck, setShortFilmsCheck] = useState(false);
   const token = localStorage.getItem("token");
+  const savedMoviesList = JSON.parse(localStorage.getItem("savedMovies"));
 
   const deleteMovie = (movieId, likeHandler) => {
     mainApi
@@ -21,6 +24,15 @@ function SavedMovies({ savedMovies, setSavedMovies, onDeleteHandler }) {
       .catch((e) => console.log(e));
   };
 
+  const submitHandler = (isOnlyShortFilms, searchQuery) => {
+    const filteredMovies = filterMovies(searchQuery, savedMoviesList);
+    const filteredShortMovies = findOnlyShortMovies(filteredMovies);
+
+    isOnlyShortFilms
+      ? setSavedMovies(filteredShortMovies)
+      : setSavedMovies(filteredMovies);
+  };
+
   return (
     <div className="saved-movies-page">
       <Header />
@@ -29,7 +41,11 @@ function SavedMovies({ savedMovies, setSavedMovies, onDeleteHandler }) {
           className="movies saved-movies-page__movies"
           aria-label="Сохраненные фильмы"
         >
-          <SearchForm />
+          <SearchForm
+            submitHandler={submitHandler}
+            checkbox={shortFilmsCheck}
+            setCheckbox={setShortFilmsCheck}
+          />
           {savedMovies && (
             <MoviesCardList
               allMovies={savedMovies}
