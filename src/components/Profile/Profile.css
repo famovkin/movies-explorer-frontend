@@ -116,17 +116,43 @@
   margin: 0;
   padding: 0;
   border: none;
-  margin-bottom: 178px;
+  margin-bottom: 146px; /*178px*/
 }
 
 @media (max-width: 768px) {
   .profile__inputs {
-    margin-bottom: 169px;
+    margin-bottom: 137px; /*169px*/
   }
 }
 
 @media (max-width: 500px) {
   .profile__inputs {
-    margin-bottom: 335px;
+    margin-bottom: 304px;
+  }
+}
+
+.profile__error-message {
+  display: block;
+  min-height: 17px;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 15px;
+  text-align: center;
+  color: transparent;
+  transition: all 0.4s ease-in-out;
+}
+
+.profile__error-message_type_success {
+  color: #3ddc84;
+}
+
+.profile__error-message_type_fail {
+  color: #ee3465;
+}
+
+@media (max-width: 500px) {
+  .profile__error-message {
+    height: 16px;
+    font-size: 13px;
   }
 }

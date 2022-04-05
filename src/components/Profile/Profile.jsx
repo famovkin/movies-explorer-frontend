@@ -10,7 +10,7 @@ import { UseCheckFormValidity } from "../../hooks/UseCheckFormValidity";
 import { countInputs } from "../../utils/countInputs";
 import "./Profile.css";
 
-function Profile({ setIsLoggedIn, submitHandler }) {
+function Profile({ setIsLoggedIn, submitHandler, message }) {
   const { currentUser, setCurrentUser } = useContext(currentUserContext);
   const {
     values,
@@ -34,6 +34,7 @@ function Profile({ setIsLoggedIn, submitHandler }) {
 
   const signOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("queryData");
     setIsLoggedIn(false);
     history.push("/");
     setCurrentUser({
@@ -79,6 +80,15 @@ function Profile({ setIsLoggedIn, submitHandler }) {
               autoComplete="off"
             />
           </fieldset>
+          <p
+            className={`profile__error-message ${
+              message.status
+                ? `profile__error-message_type_${message.status}`
+                : ""
+            }`}
+          >
+            {message.text}
+          </p>
           <div className="profile__buttons">
             <Button
               className={`button_type_profile ${

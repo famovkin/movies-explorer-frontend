@@ -22,6 +22,10 @@ function App() {
     email: "",
   });
   const [savedMovies, setSavedMovies] = useState([]);
+  const [profileMessage, setProfileMessage] = useState({
+    text: "",
+    status: "",
+  });
   const token = localStorage.getItem("token");
   const history = useHistory();
 
@@ -106,11 +110,16 @@ function App() {
           name: userDataUpdated.name,
           email: userDataUpdated.email,
         });
+        setProfileMessage({ text: "Изменения сохранены", status: "success", });
+        setTimeout(() => setProfileMessage({text: "Изменения сохранены", status: ""}), 2000);
       })
-      .catch((e) => console.log(e))
+      .catch((e) => {
+        setProfileMessage({ text: e.message, status: "fail", });
+        setTimeout(() => setProfileMessage({text: e.message, status: ""}), 2000);
+        console.log(e);
+      })
       .finally(() => setIsLoading(false));
   }
-
   return (
     <currentUserContext.Provider value={{ currentUser, setCurrentUser }}>
       <div className="app">
@@ -141,6 +150,8 @@ function App() {
             exact
             path="/profile"
             submitHandler={updateUserInfo}
+            message={profileMessage}
+            isLoading={isLoading}
           />
           <Route path="/signup">
             <Register submitHandler={registerUser} isLoading={isLoading} />
