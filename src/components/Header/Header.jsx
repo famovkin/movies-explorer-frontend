@@ -52,7 +52,7 @@ function Header() {
         <div className="header__account-menu">
           {isLoggedIn ? (
             <Link className="header__linked-button" to="/profile">
-              <AccountButton modifier="button_type_hidden" />
+              <AccountButton modifier="button_type_account-hidden" />
             </Link>
           ) : (
             <>
