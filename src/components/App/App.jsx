@@ -46,26 +46,24 @@ function App() {
           setCurrentUser(response);
         })
         .catch((e) => console.log(e));
+
+      mainApi
+        .getSavedMovies(token)
+        .then((moviesData) => {
+          const ownSavedMovies = moviesData.filter(
+            (movie) => movie.owner === currentUser._id
+          );
+
+          localStorage.setItem("savedMovies", JSON.stringify(ownSavedMovies));
+          setSavedMovies(ownSavedMovies);
+          setSavedMoviesMessage("");
+        })
+        .catch((e) => {
+          setSavedMoviesMessage(defaultMessageError);
+          console.log(e);
+        });
     }
-  }, [token, isLoggedIn]);
-
-  useEffect(() => {
-    mainApi
-      .getSavedMovies(token)
-      .then((moviesData) => {
-        const ownSavedMovies = moviesData.filter(
-          (movie) => movie.owner === currentUser._id
-        );
-
-        localStorage.setItem("savedMovies", JSON.stringify(ownSavedMovies));
-        setSavedMovies(ownSavedMovies);
-        setSavedMoviesMessage("");
-      })
-      .catch((e) => {
-        setSavedMoviesMessage(defaultMessageError);
-        console.log(e);
-      });
-  }, [currentUser._id, setSavedMovies, token]);
+  }, [currentUser._id, setSavedMovies, token, isLoggedIn]);
 
   function registerUser(name, email, password) {
     setIsLoading(true);
