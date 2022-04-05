@@ -131,6 +131,7 @@ function Movies({ savedMovies, setSavedMovies }) {
             checkbox={shortFilmsCheck}
             setCheckbox={setShortFilmsCheck}
             lastSearchQuery={lastSearchQuery}
+            isLoading={isLoading}
           />
           {isLoading
             ? <Preloader />

@@ -10,7 +10,7 @@ import { UseCheckFormValidity } from "../../hooks/UseCheckFormValidity";
 import { countInputs } from "../../utils/countInputs";
 import "./Profile.css";
 
-function Profile({ setIsLoggedIn, submitHandler, message }) {
+function Profile({ setIsLoggedIn, submitHandler, message, isLoading }) {
   const { currentUser, setCurrentUser } = useContext(currentUserContext);
   const {
     values,
@@ -60,24 +60,22 @@ function Profile({ setIsLoggedIn, submitHandler, message }) {
               label="Имя"
               modifier="profile"
               type="text"
-              required
-              minLength="2"
-              maxLength="30"
               onChange={handleChange}
               value={values["name"] || ""}
               error={errors["name"]}
               autoComplete="off"
+              disabled={isLoading}
             />
             <Input
               name="email"
               label="E-mail"
               modifier="profile"
               type="email"
-              required
               onChange={handleChange}
               value={values["email"] || ""}
               error={errors["email"]}
               autoComplete="off"
+              disabled={isLoading}
             />
           </fieldset>
           <p
@@ -92,12 +90,13 @@ function Profile({ setIsLoggedIn, submitHandler, message }) {
           <div className="profile__buttons">
             <Button
               className={`button_type_profile ${
-                !isFormValid && "button_type_disabled"
+                (!isFormValid || isLoading) && "button_type_disabled"
               }`}
               type="submit"
               isFormValid={isFormValid}
+              isLoading={isLoading}
             >
-              Редактировать
+              {isLoading ? "Сохраняем..." : "Редактировать"}
             </Button>
             <Button
               className="button_type_profile button_type_red-text"

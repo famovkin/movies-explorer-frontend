@@ -40,6 +40,10 @@
   color: #fff;
 }
 
+.search-form__input_disabled {
+  color: #565656;
+}
+
 @media (max-width: 500px) {
   .search-form__input {
     padding: 11px 0;
@@ -53,6 +57,11 @@
   gap: 12px;
   justify-content: center;
   margin: auto;
+}
+
+.search-form__label_disabled {
+  opacity: 0.3;
+  pointer-events: none;
 }
 
 .search-form__radio {

@@ -38,7 +38,7 @@
 }
 
 .button_type_disabled {
-  opacity: 0.2;
+  opacity: 0.3;
   pointer-events: none;
 }
 

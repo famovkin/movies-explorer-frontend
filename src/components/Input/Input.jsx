@@ -13,7 +13,9 @@ function Input({ name, label, error, modifier, ...props }) {
           {label}
         </label>
         <input
-          className={`input__field input__field_type_${modifier}`}
+          className={`input__field input__field_type_${modifier} ${
+            props.disabled ? "input_field_type_disabled" : ""
+          }`}
           id={name}
           name={name}
           {...props}

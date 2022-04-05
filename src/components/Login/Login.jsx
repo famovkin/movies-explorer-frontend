@@ -40,6 +40,7 @@ function Login({ submitHandler, isLoading, message, setMessage }) {
             onChange={handleChange}
             type="email"
             autoComplete="off"
+            disabled={isLoading}
           />
           <Input
             name="password"
@@ -50,6 +51,7 @@ function Login({ submitHandler, isLoading, message, setMessage }) {
             onChange={handleChange}
             type="password"
             autoComplete="off"
+            disabled={isLoading}
           />
         </fieldset>
         <p
@@ -61,10 +63,11 @@ function Login({ submitHandler, isLoading, message, setMessage }) {
         </p>
         <Button
           className={`button_type_blue button_type_submit ${
-            !isFormValid && "button_type_disabled"
+            (!isFormValid || isLoading) && "button_type_disabled"
           }`}
           type="submit"
-          disabled={!isFormValid}
+          isFormValid={isFormValid}
+          isLoading={isLoading}
         >
           {isLoading ? "Загрузка..." : "Войти"}
         </Button>

@@ -8,13 +8,14 @@ function Button({
   type = "button",
   handler,
   isFormValid = true,
+  isLoading,
 }) {
   return (
     <button
       className={`button ${className}`}
       type={type}
       onClick={handler}
-      disabled={!isFormValid}
+      disabled={!isFormValid || isLoading}
     >
       {children}
     </button>

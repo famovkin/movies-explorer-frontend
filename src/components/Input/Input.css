@@ -17,6 +17,10 @@
   font-size: 13px;
 }
 
+.input_field_type_disabled {
+  color: #565656;
+}
+
 .input__error {
   display: block;
   font-size: 10px;
