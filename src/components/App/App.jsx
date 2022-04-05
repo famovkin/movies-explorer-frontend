@@ -12,6 +12,7 @@ import Profile from "../Profile/Profile";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import currentUserContext from "../../context/currentUserContext";
 import { mainApi } from "../../utils/MainApi";
+import { defaultMessageError } from "../../utils/constants";
 import * as auth from "../../utils/auth";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
     text: "",
     status: "",
   });
+  const [savedMoviesMessage, setSavedMoviesMessage] = useState("");
   const token = localStorage.getItem("token");
   const history = useHistory();
 
@@ -57,8 +59,12 @@ function App() {
 
         localStorage.setItem("savedMovies", JSON.stringify(ownSavedMovies));
         setSavedMovies(ownSavedMovies);
+        setSavedMoviesMessage("");
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setSavedMoviesMessage(defaultMessageError);
+        console.log(e);
+      });
   }, [currentUser._id, setSavedMovies, token]);
 
   function registerUser(name, email, password) {
@@ -142,6 +148,7 @@ function App() {
             path="/saved-movies"
             savedMovies={savedMovies}
             setSavedMovies={setSavedMovies}
+            message={savedMoviesMessage}
           />
           <ProtectedRoute
             component={Profile}

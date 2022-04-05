@@ -11,6 +11,7 @@ import { findOnlyShortMovies, filterMovies } from "../../utils/filters";
 import { beatFilmApi } from "../../utils/MoviesApi";
 import { getOneIdByAnother } from "../../utils/getOneIdByAnother";
 import { UseGetWidthBrowser } from "../../hooks/UseGetWidthBrowse";
+import { defaultMessageError } from "../../utils/constants";
 import { mainApi } from "../../utils/MainApi";
 import "./Movies.css";
 
@@ -82,7 +83,7 @@ function Movies({ savedMovies, setSavedMovies }) {
       setIsLoading(false);
     } catch (e) {
       setMovies([]);
-      setErrorMessage("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз");
+      setErrorMessage(defaultMessageError);
       console.log(e);
       setIsLoading(false);
     }

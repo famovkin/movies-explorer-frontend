@@ -10,3 +10,13 @@
 .movies-page__movies-list_type_saved {
   margin-bottom: 169px;
 }
+
+.movies__message_type_error {
+  padding-top: 60px;
+}
+
+@media (max-width: 768px) {
+  .movies__message_type_error {
+    padding-top: 80px;
+  }
+}

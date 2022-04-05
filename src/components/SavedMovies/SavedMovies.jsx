@@ -9,7 +9,7 @@ import { mainApi } from "../../utils/MainApi";
 import { findOnlyShortMovies, filterMovies } from "../../utils/filters";
 import "./SavedMovies.css";
 
-function SavedMovies({ savedMovies, setSavedMovies }) {
+function SavedMovies({ savedMovies, setSavedMovies, message }) {
   const [shortFilmsCheck, setShortFilmsCheck] = useState(false);
   const token = localStorage.getItem("token");
   const savedMoviesList = JSON.parse(localStorage.getItem("savedMovies"));
@@ -46,15 +46,16 @@ function SavedMovies({ savedMovies, setSavedMovies }) {
             checkbox={shortFilmsCheck}
             setCheckbox={setShortFilmsCheck}
           />
-          {savedMovies && (
+          {savedMovies && !message && (
             <MoviesCardList
               allMovies={savedMovies}
               onDeleteHandler={deleteMovie}
               onSavedPage={true}
             />
           )}
-          {savedMovies.length === 0 && (
-            <p className="movies__message">Сохраненных фильмов нет</p>
+          {message && <p className="movies__message movies__message_type_error">{message}</p>}
+          {savedMovies.length === 0 && !message && (
+            <p className="movies__message">{"Ничего не найдено"}</p>
           )}
         </section>
       </Container>
