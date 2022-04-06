@@ -12,6 +12,8 @@ import "./Profile.css";
 
 function Profile({ setIsLoggedIn, submitHandler, message, isLoading }) {
   const { currentUser, setCurrentUser } = useContext(currentUserContext);
+  // создаем новый объект о пользователе для сравнения с values
+  const currentUserData = { name: currentUser.name, email: currentUser.email };
   const {
     values,
     errors,
@@ -19,11 +21,17 @@ function Profile({ setIsLoggedIn, submitHandler, message, isLoading }) {
     handleChange,
     isFormValid,
     setIsFormValid,
-  } = UseCustomValidation();
+  } = UseCustomValidation(currentUser.name, currentUser.email);
   const history = useHistory();
   const amountInputs = countInputs(".input");
 
-  UseCheckFormValidity(values, errors, amountInputs, setIsFormValid);
+  UseCheckFormValidity(
+    values,
+    errors,
+    amountInputs,
+    setIsFormValid,
+    currentUserData
+  );
 
   useEffect(() => {
     setValues({

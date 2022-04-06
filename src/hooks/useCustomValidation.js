@@ -3,7 +3,7 @@ import validator from "validator";
 
 import { deleteKeyFromObj } from "../utils/deleteKeyFromObj";
 
-export const UseCustomValidation = () => {
+export const UseCustomValidation = (currentName, currentEmail) => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
@@ -25,7 +25,11 @@ export const UseCustomValidation = () => {
         }
         break;
       case "name":
-        if (value.length === 0) {
+        // сравниванием значение из инпута и значение их хранилища
+        if (value === currentName) {
+          // не отображаем ошибку, а просто отключаем кнопку, поэтому пустая строка
+          setErrors({ ...errors, [name]: "" })
+        } else if (value.length === 0) {
           setRequiredError(name);
         } else if (value.length < 2) {
           setErrors({
@@ -49,7 +53,9 @@ export const UseCustomValidation = () => {
         }
         break;
       case "email":
-        if (value.length === 0) {
+        if (value === currentEmail) {
+          setErrors({ ...errors, [name]: "" })
+        } else if (value.length === 0) {
           setRequiredError(name);
         } else if (!validator.isEmail(value)) {
           setErrors({
