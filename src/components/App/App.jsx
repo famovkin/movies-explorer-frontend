@@ -12,7 +12,7 @@ import Profile from "../Profile/Profile";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import currentUserContext from "../../context/currentUserContext";
 import { mainApi } from "../../utils/MainApi";
-import { defaultMessageError } from "../../utils/constants";
+import { DEFAULT_ERROR_MESSAGE } from "../../utils/constants";
 import * as auth from "../../utils/auth";
 
 function App() {
@@ -65,7 +65,7 @@ function App() {
           setSavedMoviesMessage("");
         })
         .catch((e) => {
-          setSavedMoviesMessage(defaultMessageError);
+          setSavedMoviesMessage(DEFAULT_ERROR_MESSAGE);
           console.log(e);
         });
     }

@@ -11,8 +11,15 @@ import { findOnlyShortMovies, filterMovies } from "../../utils/filters";
 import { beatFilmApi } from "../../utils/MoviesApi";
 import { getOneIdByAnother } from "../../utils/getOneIdByAnother";
 import { UseGetWidthBrowser } from "../../hooks/UseGetWidthBrowse";
-import { defaultMessageError } from "../../utils/constants";
+import { DEFAULT_ERROR_MESSAGE } from "../../utils/constants";
 import { mainApi } from "../../utils/MainApi";
+import {
+  LARGE,
+  MEDIUM,
+  SMALL,
+  MOBILE_WIDTH,
+  LAPTOP_WIDTH,
+} from "../../utils/paginationConfig";
 import "./Movies.css";
 
 function Movies({ savedMovies, setSavedMovies }) {
@@ -30,15 +37,15 @@ function Movies({ savedMovies, setSavedMovies }) {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    if (width >= 1280) {
-      setInitialCards(12);
-      setCardsInBundle(3);
-    } else if (width > 480 && width < 1280) {
-      setInitialCards(8);
-      setCardsInBundle(2);
-    } else if (width <= 480) {
-      setInitialCards(5);
-      setCardsInBundle(5);
+    if (width >= LAPTOP_WIDTH) {
+      setInitialCards(LARGE.firstPageCount);
+      setCardsInBundle(LARGE.nextPageCount);
+    } else if (width > MOBILE_WIDTH && width < LAPTOP_WIDTH) {
+      setInitialCards(MEDIUM.firstPageCount);
+      setCardsInBundle(MEDIUM.nextPageCount);
+    } else if (width <= MOBILE_WIDTH) {
+      setInitialCards(SMALL.firstPageCount);
+      setCardsInBundle(SMALL.nextPageCount);
     }
   }, [width]);
 
@@ -83,7 +90,7 @@ function Movies({ savedMovies, setSavedMovies }) {
       setIsLoading(false);
     } catch (e) {
       setMovies([]);
-      setErrorMessage(defaultMessageError);
+      setErrorMessage(DEFAULT_ERROR_MESSAGE);
       console.log(e);
       setIsLoading(false);
     }

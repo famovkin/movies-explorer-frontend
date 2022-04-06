@@ -1,19 +1,16 @@
 import React from "react";
 
+import { navTabs } from "../../utils/constants";
 import "./NavTab.css";
 
 function NavTab() {
   return (
     <nav className="nav-tab">
-      <a className="nav-tab__link" href="#about">
-        О проекте
-      </a>
-      <a className="nav-tab__link" href="#techs">
-        Технологии
-      </a>
-      <a className="nav-tab__link" href="#student">
-        Студент
-      </a>
+      {navTabs.map((tab) => (
+        <a className="nav-tab__link" key={tab.id} href={tab.url}>
+          {tab.title}{" "}
+        </a>
+      ))}
     </nav>
   );
 }

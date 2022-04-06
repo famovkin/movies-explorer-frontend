@@ -3,12 +3,16 @@ import React, { useState, useEffect } from "react";
 import Button from "../Button/Button";
 import Icons from "../Icons";
 import { getCorrectDuration } from "../../utils/getCorrectDuration";
+import {
+  SERVER_URL,
+  UNKNOWN_IMAGE_URL,
+  UNKNOWN_TRAILER_URL,
+  UNKNOWN_CARD_TEXT,
+} from "../../utils/constants";
 import "./MoviesCard.css";
 
 function MoviesCard({ onSavedPage, savedMovies, onSaveHandler, onDeleteHandler, ...props }) {
   const [isSaved, setIsSaved] = useState(false);
-  const SERVER_URL = "https://api.nomoreparties.co/";
-  const UNKNOWN_IMAGE_URL = "https://raw.githubusercontent.com/famovkin/movies-explorer-frontend/level-3/src/images/unknown-image.jpeg"
 
   useEffect(() => {
     if (savedMovies.some((movie) => movie.movieId === props.id)) {
@@ -18,15 +22,15 @@ function MoviesCard({ onSavedPage, savedMovies, onSaveHandler, onDeleteHandler, 
 
   const handleSave = () => {
     const movieData = {
-      country: props.country || "Неизвестна",
-      director: props.director || "Неизвестен",
+      country: props.country || UNKNOWN_CARD_TEXT,
+      director: props.director || UNKNOWN_CARD_TEXT,
       duration: props.duration,
-      year: props.year || "Неизвестен",
-      description: props.description || "Без описания",
+      year: props.year || UNKNOWN_CARD_TEXT,
+      description: props.description || UNKNOWN_CARD_TEXT,
       image: SERVER_URL + props.image.url || UNKNOWN_IMAGE_URL,
-      trailerLink: props.trailerLink || "https://www.youtube.com",
-      nameRU: props.nameRU || props.nameEN || "Неизвестно",
-      nameEN: props.nameEN || props.nameRU || "Неизвестно",
+      trailerLink: props.trailerLink || UNKNOWN_TRAILER_URL,
+      nameRU: props.nameRU || props.nameEN || UNKNOWN_CARD_TEXT,
+      nameEN: props.nameEN || props.nameRU || UNKNOWN_CARD_TEXT,
       thumbnail: SERVER_URL + props.image.formats.thumbnail.url || UNKNOWN_IMAGE_URL,
       movieId: props.id,
     };
