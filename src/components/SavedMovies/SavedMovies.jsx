@@ -11,26 +11,29 @@ import "./SavedMovies.css";
 
 function SavedMovies({ savedMovies, setSavedMovies, message }) {
   const [shortFilmsCheck, setShortFilmsCheck] = useState(false);
+  // создаем дополнительный стейт, который будем отрисовывать
+  const [moviesForRender, setMoviesForRender] = useState(savedMovies)
   const token = localStorage.getItem("token");
-  const savedMoviesList = JSON.parse(localStorage.getItem("savedMovies"));
 
   const deleteMovie = (movieId, likeHandler) => {
     mainApi
       .removeMovie(movieId, token)
       .then(() => {
         likeHandler(false);
+        // при удалении меняем оба состояния, чтобы карточка не отобразилась
         setSavedMovies((state) => state.filter((m) => m._id !== movieId));
+        setMoviesForRender((state) => state.filter((m) => m._id !== movieId));
       })
       .catch((e) => console.log(e));
   };
 
   const submitHandler = (isOnlyShortFilms, searchQuery) => {
-    const filteredMovies = filterMovies(searchQuery, savedMoviesList);
+    const filteredMovies = filterMovies(searchQuery, savedMovies);
     const filteredShortMovies = findOnlyShortMovies(filteredMovies);
 
     isOnlyShortFilms
-      ? setSavedMovies(filteredShortMovies)
-      : setSavedMovies(filteredMovies);
+      ? setMoviesForRender(filteredShortMovies)
+      : setMoviesForRender(filteredMovies);
   };
 
   return (
@@ -46,15 +49,15 @@ function SavedMovies({ savedMovies, setSavedMovies, message }) {
             checkbox={shortFilmsCheck}
             setCheckbox={setShortFilmsCheck}
           />
-          {savedMovies && !message && (
+          {moviesForRender && !message && (
             <MoviesCardList
-              allMovies={savedMovies}
+              allMovies={moviesForRender}
               onDeleteHandler={deleteMovie}
               onSavedPage={true}
             />
           )}
           {message && <p className="movies__message movies__message_type_error">{message}</p>}
-          {savedMovies.length === 0 && !message && (
+          {moviesForRender.length === 0 && !message && (
             <p className="movies__message">{"Ничего не найдено"}</p>
           )}
         </section>
