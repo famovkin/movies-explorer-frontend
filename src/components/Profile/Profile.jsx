@@ -35,6 +35,7 @@ function Profile({ setIsLoggedIn, submitHandler, message, isLoading }) {
   const signOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("queryData");
+    localStorage.removeItem("savedMovies");
     setIsLoggedIn(false);
     history.push("/");
     setCurrentUser({
