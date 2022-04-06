@@ -8,6 +8,7 @@ import "./MoviesCard.css";
 function MoviesCard({ onSavedPage, savedMovies, onSaveHandler, onDeleteHandler, ...props }) {
   const [isSaved, setIsSaved] = useState(false);
   const SERVER_URL = "https://api.nomoreparties.co/";
+  const UNKNOWN_IMAGE_URL = "https://raw.githubusercontent.com/famovkin/movies-explorer-frontend/level-3/src/images/unknown-image.jpeg"
 
   useEffect(() => {
     if (savedMovies.some((movie) => movie.movieId === props.id)) {
@@ -17,16 +18,16 @@ function MoviesCard({ onSavedPage, savedMovies, onSaveHandler, onDeleteHandler, 
 
   const handleSave = () => {
     const movieData = {
-      country: props.country,
-      director: props.director,
+      country: props.country || "Неизвестна",
+      director: props.director || "Неизвестен",
       duration: props.duration,
-      year: props.year,
-      description: props.description,
-      image: SERVER_URL + props.image.url,
+      year: props.year || "Неизвестен",
+      description: props.description || "Без описания",
+      image: SERVER_URL + props.image.url || UNKNOWN_IMAGE_URL,
       trailerLink: props.trailerLink || "https://www.youtube.com",
-      nameRU: props.nameRU || props.nameEN,
-      nameEN: props.nameEN || props.nameRU,
-      thumbnail: SERVER_URL + props.image.formats.thumbnail.url,
+      nameRU: props.nameRU || props.nameEN || "Неизвестно",
+      nameEN: props.nameEN || props.nameRU || "Неизвестно",
+      thumbnail: SERVER_URL + props.image.formats.thumbnail.url || UNKNOWN_IMAGE_URL,
       movieId: props.id,
     };
   onSaveHandler(movieData, setIsSaved);
