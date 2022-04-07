@@ -10,7 +10,13 @@ import { UseCheckFormValidity } from "../../hooks/UseCheckFormValidity";
 import { countInputs } from "../../utils/countInputs";
 import "./Profile.css";
 
-function Profile({ setIsLoggedIn, submitHandler, message, isLoading }) {
+function Profile({
+  setIsLoggedIn,
+  submitHandler,
+  message,
+  isLoading,
+  messageModifier,
+}) {
   const { currentUser, setCurrentUser } = useContext(currentUserContext);
   // создаем новый объект о пользователе для сравнения с values
   const currentUserData = { name: currentUser.name, email: currentUser.email };
@@ -88,12 +94,12 @@ function Profile({ setIsLoggedIn, submitHandler, message, isLoading }) {
           </fieldset>
           <p
             className={`profile__error-message ${
-              message.status
-                ? `profile__error-message_type_${message.status}`
+              messageModifier
+                ? `profile__error-message_type_${messageModifier}`
                 : ""
             }`}
           >
-            {message.text}
+            {message}
           </p>
           <div className="profile__buttons">
             <Button

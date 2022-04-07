@@ -8,7 +8,8 @@ class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Что-то пошло не так. Обратитесь к разработчику`);
+
+    return Promise.reject(res);
   }
 
   getCurrentUserInfo(token) {

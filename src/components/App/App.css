@@ -4,6 +4,7 @@
   -moz-osx-font-smoothing: grayscale;
   background-color: #202020;
   color: #fff;
+  position: relative;
 }
 
 .app__input {

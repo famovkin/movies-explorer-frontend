@@ -9,6 +9,7 @@ import NotFound from "../NotFound/NotFound";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
+import ErrorPopup from "../ЕrrorPopup/ErrorPopup";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import currentUserContext from "../../context/currentUserContext";
 import { mainApi } from "../../utils/MainApi";
@@ -23,17 +24,29 @@ function App() {
     email: "",
   });
   const [savedMovies, setSavedMovies] = useState([]);
-  const [profileMessage, setProfileMessage] = useState({
-    text: "",
-    status: "",
-  });
+  const [profileMessage, setProfileMessage] = useState("");
+  const [profileMessageModifier, setProfileMessageModifier] = useState(false);
   const [savedMoviesMessage, setSavedMoviesMessage] = useState("");
-  const [unauthPageMessage, setUnauthPageMessage] = useState("")
+  const [unauthPageMessage, setUnauthPageMessage] = useState("");
+  const [popupError, setPopupError] = useState("");
+  const [popupErrorStatus, setPopupErrorStatus] = useState(false);
   const token = localStorage.getItem("token");
   const history = useHistory();
 
+  function showProfileMessage(text, modifier) {
+    setProfileMessage(text);
+    setProfileMessageModifier(modifier);
+    setTimeout(() => setProfileMessageModifier(""), 2000);
+  }
+
+  function showPopupError(text = "Что-то пошло не так") {
+    setPopupError(text);
+    setPopupErrorStatus(true);
+    setTimeout(() => setPopupErrorStatus(false), 4000);
+  }
+
   useEffect(() => {
-    if (token) {
+    if (token && !popupErrorStatus) {
       setIsLoggedIn(true);
       history.push("/movies");
     }
@@ -43,23 +56,23 @@ function App() {
     if (isLoggedIn) {
       mainApi
         .getCurrentUserInfo(token)
-        .then(([response]) => {
-          setCurrentUser(response);
-        })
-        .catch((e) => console.log(e));
-      }
-  }, [token, isLoggedIn])
+        .then(([response]) => setCurrentUser(response))
+        .catch((e) => {
+          showPopupError(e.message);
+          setIsLoggedIn(false);
+          history.push("/signin");
+        });
+    }
+  }, [token, isLoggedIn, history]);
 
   useEffect(() => {
-    if (isLoggedIn) {
-
+    if (isLoggedIn && !popupErrorStatus) {
       mainApi
         .getSavedMovies(token)
         .then((moviesData) => {
           const ownSavedMovies = moviesData.filter(
             (movie) => movie.owner === currentUser._id
           );
-
           localStorage.setItem("savedMovies", JSON.stringify(ownSavedMovies));
           setSavedMovies(ownSavedMovies);
           setSavedMoviesMessage("");
@@ -122,19 +135,15 @@ function App() {
           name: userDataUpdated.name,
           email: userDataUpdated.email,
         });
-        setProfileMessage({ text: "Изменения сохранены", status: "success", });
-        setTimeout(() => setProfileMessage({text: "Изменения сохранены", status: ""}), 2000);
+        showProfileMessage("Изменения сохранены", "success");
       })
-      .catch((e) => {
-        setProfileMessage({ text: e.message, status: "fail", });
-        setTimeout(() => setProfileMessage({text: e.message, status: ""}), 2000);
-        console.log(e);
-      })
+      .catch((e) => showProfileMessage(e.message, "fail"))
       .finally(() => setIsLoading(false));
   }
   return (
     <currentUserContext.Provider value={{ currentUser, setCurrentUser }}>
       <div className="app">
+        <ErrorPopup text={popupError} isVisible={popupErrorStatus} />
         <Switch>
           <Route exact path="/">
             <Main />
@@ -146,6 +155,7 @@ function App() {
             path="/movies"
             savedMovies={savedMovies}
             setSavedMovies={setSavedMovies}
+            cardErrorHandler={showPopupError}
           />
           <ProtectedRoute
             component={SavedMovies}
@@ -155,6 +165,7 @@ function App() {
             savedMovies={savedMovies}
             setSavedMovies={setSavedMovies}
             message={savedMoviesMessage}
+            cardErrorHandler={showPopupError}
           />
           <ProtectedRoute
             component={Profile}
@@ -163,8 +174,9 @@ function App() {
             exact
             path="/profile"
             submitHandler={updateUserInfo}
-            message={profileMessage}
             isLoading={isLoading}
+            message={profileMessage}
+            messageModifier={profileMessageModifier}
           />
           <Route path="/signup">
             <Register

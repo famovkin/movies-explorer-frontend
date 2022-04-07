@@ -9,10 +9,15 @@ import { mainApi } from "../../utils/MainApi";
 import { findOnlyShortMovies, filterMovies } from "../../utils/filters";
 import "./SavedMovies.css";
 
-function SavedMovies({ savedMovies, setSavedMovies, message }) {
+function SavedMovies({
+  savedMovies,
+  setSavedMovies,
+  message,
+  cardErrorHandler,
+}) {
   const [shortFilmsCheck, setShortFilmsCheck] = useState(false);
   // создаем дополнительный стейт, который будем отрисовывать
-  const [moviesForRender, setMoviesForRender] = useState(savedMovies)
+  const [moviesForRender, setMoviesForRender] = useState(savedMovies);
   const token = localStorage.getItem("token");
 
   const deleteMovie = (movieId, likeHandler) => {
@@ -23,6 +28,12 @@ function SavedMovies({ savedMovies, setSavedMovies, message }) {
         // при удалении меняем оба состояния, чтобы карточка не отобразилась
         setSavedMovies((state) => state.filter((m) => m._id !== movieId));
         setMoviesForRender((state) => state.filter((m) => m._id !== movieId));
+      })
+      .catch((e) => e.json())
+      .then((e) => {
+        if (e?.message) {
+          cardErrorHandler(e.message);
+        }
       })
       .catch((e) => console.log(e));
   };
@@ -56,7 +67,11 @@ function SavedMovies({ savedMovies, setSavedMovies, message }) {
               onSavedPage={true}
             />
           )}
-          {message && <p className="movies__message movies__message_type_error">{message}</p>}
+          {message && (
+            <p className="movies__message movies__message_type_error">
+              {message}
+            </p>
+          )}
           {moviesForRender.length === 0 && !message && (
             <p className="movies__message">{"Ничего не найдено"}</p>
           )}

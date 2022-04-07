@@ -22,7 +22,7 @@ import {
 } from "../../utils/paginationConfig";
 import "./Movies.css";
 
-function Movies({ savedMovies, setSavedMovies }) {
+function Movies({ savedMovies, setSavedMovies, cardErrorHandler }) {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [initialCardsAmount, setInitialCards] = useState(0); // первоначальное кол-во карточек
@@ -57,15 +57,14 @@ function Movies({ savedMovies, setSavedMovies }) {
       setLastSearchQuery(JSON.parse(queryData)?.searchQuery);
       setShortFilmsCheck(JSON.parse(queryData)?.isOnlyShortFilms);
     }
-  }, [queryData])
+  }, [queryData]);
 
   useEffect(() => {
     if (!errorMessage) {
       shortFilmsCheck
-      ? setMovies(filteredShortMovies.slice(0, cardsCount))
-      : setMovies(filteredMovies.slice(0, cardsCount));
+        ? setMovies(filteredShortMovies.slice(0, cardsCount))
+        : setMovies(filteredMovies.slice(0, cardsCount));
     }
-
   }, [shortFilmsCheck, cardsCount, errorMessage]);
 
   const submitHandler = async (isOnlyShortFilms, searchQuery) => {
@@ -86,7 +85,7 @@ function Movies({ savedMovies, setSavedMovies }) {
         ? setMovies(filteredShortMovies.slice(0, initialCardsAmount))
         : setMovies(filteredMovies.slice(0, initialCardsAmount));
 
-      setErrorMessage("")
+      setErrorMessage("");
       setIsLoading(false);
     } catch (e) {
       setMovies([]);
@@ -114,16 +113,30 @@ function Movies({ savedMovies, setSavedMovies }) {
         setSavedMovies([...savedMovies, newMovie]);
         likeHandler(true);
       })
+      .catch((e) => e.json())
+      .then((e) => {
+        if (e?.message) {
+          cardErrorHandler(e.message);
+        }
+      })
       .catch((e) => console.log(e));
   };
 
   const deleteMovie = (movieId, likeHandler) => {
-    const idInSavedMovies = getOneIdByAnother(movieId, savedMovies)
+    const idInSavedMovies = getOneIdByAnother(movieId, savedMovies);
     mainApi
       .removeMovie(idInSavedMovies, token)
       .then(() => {
         likeHandler(false);
-        setSavedMovies((state) => state.filter((m) => m._id !== idInSavedMovies));
+        setSavedMovies((state) =>
+          state.filter((m) => m._id !== idInSavedMovies)
+        );
+      })
+      .catch((e) => e.json())
+      .then((e) => {
+        if (e?.message) {
+          cardErrorHandler(e.message);
+        }
       })
       .catch((e) => console.log(e));
   };
@@ -140,24 +153,28 @@ function Movies({ savedMovies, setSavedMovies }) {
             lastSearchQuery={lastSearchQuery}
             isLoading={isLoading}
           />
-          {isLoading
-            ? <Preloader />
-            : <MoviesCardList
-                allMovies={movies}
-                savedMovies={savedMovies}
-                onSaveHandler={saveMovie}
-                onDeleteHandler={deleteMovie}
-                onSavedPage={false}
-              />}
+          {isLoading ? (
+            <Preloader />
+          ) : (
+            <MoviesCardList
+              allMovies={movies}
+              savedMovies={savedMovies}
+              onSaveHandler={saveMovie}
+              onDeleteHandler={deleteMovie}
+              onSavedPage={false}
+            />
+          )}
           {!isLoading && movies.length === 0 && (
-            <p className="movies__message">{errorMessage || "Ничего не найдено"}</p>
+            <p className="movies__message">
+              {errorMessage || "Ничего не найдено"}
+            </p>
           )}
           <div className="movies__footer">
             {shortFilmsCheck
               ? cardsCount < filteredShortMovies.length &&
-                !isLoading && <MoreButton displayed={errorMessage}/>
+                !isLoading && <MoreButton displayed={errorMessage} />
               : cardsCount < filteredMovies.length &&
-                !isLoading && <MoreButton displayed={errorMessage}/>}
+                !isLoading && <MoreButton displayed={errorMessage} />}
           </div>
         </section>
       </Container>
