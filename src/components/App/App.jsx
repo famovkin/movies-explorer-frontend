@@ -14,6 +14,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import currentUserContext from "../../context/currentUserContext";
 import { mainApi } from "../../utils/MainApi";
 import { DEFAULT_ERROR_MESSAGE } from "../../utils/constants";
+import { NOTIFICATION_DURATION } from "../../utils/constants";
 import * as auth from "../../utils/auth";
 
 function App() {
@@ -36,13 +37,13 @@ function App() {
   function showProfileMessage(text, modifier) {
     setProfileMessage(text);
     setProfileMessageModifier(modifier);
-    setTimeout(() => setProfileMessageModifier(""), 2000);
+    setTimeout(() => setProfileMessageModifier(""), NOTIFICATION_DURATION);
   }
 
   function showPopupError(text = "Что-то пошло не так") {
     setPopupError(text);
     setPopupErrorStatus(true);
-    setTimeout(() => setPopupErrorStatus(false), 4000);
+    setTimeout(() => setPopupErrorStatus(false), NOTIFICATION_DURATION);
   }
 
   useEffect(() => {
@@ -82,7 +83,7 @@ function App() {
           console.log(e);
         });
     }
-  }, [currentUser._id, setSavedMovies]);
+  }, [currentUser._id, setSavedMovies, token, popupErrorStatus]);
 
   function registerUser(name, email, password) {
     setIsLoading(true);
