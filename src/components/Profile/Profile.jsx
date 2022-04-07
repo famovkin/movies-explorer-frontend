@@ -10,13 +10,13 @@ import { UseCheckFormValidity } from "../../hooks/UseCheckFormValidity";
 import { countInputs } from "../../utils/countInputs";
 import "./Profile.css";
 
-function Profile({
+const Profile = ({
   setIsLoggedIn,
   submitHandler,
   message,
   isLoading,
   messageModifier,
-}) {
+}) => {
   const { currentUser, setCurrentUser } = useContext(currentUserContext);
   // создаем новый объект о пользователе для сравнения с values
   const currentUserData = { name: currentUser.name, email: currentUser.email };
@@ -123,6 +123,6 @@ function Profile({
       </div>
     </section>
   );
-}
+};
 
 export default Profile;

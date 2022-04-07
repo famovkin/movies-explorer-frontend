@@ -22,7 +22,7 @@ import {
 } from "../../utils/paginationConfig";
 import "./Movies.css";
 
-function Movies({ savedMovies, setSavedMovies, cardErrorHandler }) {
+const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [initialCardsAmount, setInitialCards] = useState(0); // первоначальное кол-во карточек
@@ -181,6 +181,6 @@ function Movies({ savedMovies, setSavedMovies, cardErrorHandler }) {
       <Footer />
     </div>
   );
-}
+};
 
 export default Movies;

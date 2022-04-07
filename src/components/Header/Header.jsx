@@ -10,18 +10,18 @@ import Logo from "../Logo/Logo";
 import currentUserContext from "../../context/currentUserContext";
 import "./Header.css";
 
-function Header() {
+const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { currentUser, setCurrentUser } = useContext(currentUserContext);
-
-  const sidebarHandler = () => setIsSidebarOpen(!isSidebarOpen);
+  const { currentUser } = useContext(currentUserContext);
 
   useEffect(() => {
     currentUser.name === ""
       ? setIsLoggedIn(false)
       : setIsLoggedIn(true);
     }, [currentUser.name])
+
+  const sidebarHandler = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
     <Container>
@@ -79,6 +79,6 @@ function Header() {
       </header>
     </Container>
   );
-}
+};
 
 export default Header;

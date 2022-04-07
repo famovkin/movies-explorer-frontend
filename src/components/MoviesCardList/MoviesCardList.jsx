@@ -3,7 +3,13 @@ import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
 
-  function MoviesCardList({ allMovies, onSavedPage, onSaveHandler, onDeleteHandler, savedMovies }) {
+const MoviesCardList = ({
+  allMovies,
+  onSavedPage,
+  onSaveHandler,
+  onDeleteHandler,
+  savedMovies,
+}) => {
   return (
     <ul
       className={`movies-list movies-page__movies-list
@@ -22,6 +28,6 @@ import "./MoviesCardList.css";
         ))}
     </ul>
   );
-}
+};
 
 export default MoviesCardList;

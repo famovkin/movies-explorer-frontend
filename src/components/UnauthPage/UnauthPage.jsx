@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import "./UnauthPage.css";
 
-function UnauthPage({ title, children, text, link, linkText }) {
+const UnauthPage = ({ title, children, text, link, linkText }) => {
   return (
     <section className="unauth-page">
       <div className="unauth-page__container">
@@ -22,6 +22,6 @@ function UnauthPage({ title, children, text, link, linkText }) {
       </div>
     </section>
   );
-}
+};
 
 export default UnauthPage;

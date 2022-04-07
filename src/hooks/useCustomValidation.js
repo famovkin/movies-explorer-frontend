@@ -28,7 +28,7 @@ export const UseCustomValidation = (currentName, currentEmail) => {
         // сравниванием значение из инпута и значение их хранилища
         if (value === currentName) {
           // не отображаем ошибку, а просто отключаем кнопку, поэтому пустая строка
-          setErrors({ ...errors, [name]: "" })
+          setErrors({ ...errors, [name]: "" });
         } else if (value.length === 0) {
           setRequiredError(name);
         } else if (value.length < 2) {
@@ -41,8 +41,7 @@ export const UseCustomValidation = (currentName, currentEmail) => {
             ...errors,
             [name]: "Максимальное количество символов — 30",
           });
-        }
-        else if (!new RegExp(/^[а-яА-ЯёЁa-zA-Z\s/-]+$/).test(value)) {
+        } else if (!new RegExp(/^[а-яА-ЯёЁa-zA-Z\s/-]+$/).test(value)) {
           setErrors({
             ...errors,
             [name]: "Используйте буквы, дефис или пробел",
@@ -54,7 +53,7 @@ export const UseCustomValidation = (currentName, currentEmail) => {
         break;
       case "email":
         if (value === currentEmail) {
-          setErrors({ ...errors, [name]: "" })
+          setErrors({ ...errors, [name]: "" });
         } else if (value.length === 0) {
           setRequiredError(name);
         } else if (!validator.isEmail(value)) {

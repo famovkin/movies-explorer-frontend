@@ -11,14 +11,20 @@ import {
 } from "../../utils/constants";
 import "./MoviesCard.css";
 
-function MoviesCard({ onSavedPage, savedMovies, onSaveHandler, onDeleteHandler, ...props }) {
+const MoviesCard =({
+  onSavedPage,
+  savedMovies,
+  onSaveHandler,
+  onDeleteHandler,
+  ...props
+}) => {
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     if (savedMovies.some((movie) => movie.movieId === props.id)) {
       setIsSaved(true);
     }
-  }, [savedMovies, props.id])
+  }, [savedMovies, props.id]);
 
   const handleSave = () => {
     const movieData = {
@@ -34,7 +40,7 @@ function MoviesCard({ onSavedPage, savedMovies, onSaveHandler, onDeleteHandler, 
       thumbnail: SERVER_URL + props.image.formats.thumbnail.url || UNKNOWN_IMAGE_URL,
       movieId: props.id,
     };
-  onSaveHandler(movieData, setIsSaved);
+    onSaveHandler(movieData, setIsSaved);
   };
 
   const handleDelete = () => {
@@ -84,6 +90,6 @@ function MoviesCard({ onSavedPage, savedMovies, onSaveHandler, onDeleteHandler, 
       </div>
     </li>
   );
-}
+};
 
 export default MoviesCard;

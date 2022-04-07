@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Roadmap.css";
 
-function Roadmap() {
+const Roadmap = () => {
   return (
     <div className="roadmap">
       <div className="roadmap__backend">
@@ -15,6 +15,6 @@ function Roadmap() {
       </div>
     </div>
   );
-}
+};
 
 export default Roadmap;

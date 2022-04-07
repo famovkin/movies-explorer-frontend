@@ -116,12 +116,12 @@
   margin: 0;
   padding: 0;
   border: none;
-  margin-bottom: 146px; /*178px*/
+  margin-bottom: 146px;
 }
 
 @media (max-width: 768px) {
   .profile__inputs {
-    margin-bottom: 137px; /*169px*/
+    margin-bottom: 137px;
   }
 }
 

@@ -32,7 +32,7 @@ export const navTabs = [
     title: "Студент",
     url: "#student",
   },
-]
+];
 
 export const diplomaTextCards = [
   {
@@ -56,7 +56,7 @@ export const STACK = [
   "React",
   "Git",
   "Express.js",
-  "mongoDB"
+  "mongoDB",
 ];
 
 export const DEFAULT_ERROR_MESSAGE = "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз";

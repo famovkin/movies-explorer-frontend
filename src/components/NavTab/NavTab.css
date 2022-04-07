@@ -27,7 +27,7 @@
 
 .nav-tab__link:hover {
   transform: translateY(-5px);
-  background-color: #3DDC84;
+  background-color: #3ddc84;
 }
 
 @media (max-width: 500px) {

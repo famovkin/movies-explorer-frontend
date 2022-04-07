@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 
-import "./App.css";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -16,8 +15,9 @@ import { mainApi } from "../../utils/MainApi";
 import { DEFAULT_ERROR_MESSAGE } from "../../utils/constants";
 import { NOTIFICATION_DURATION } from "../../utils/constants";
 import * as auth from "../../utils/auth";
+import "./App.css";
 
-function App() {
+const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
@@ -33,18 +33,6 @@ function App() {
   const [popupErrorStatus, setPopupErrorStatus] = useState(false);
   const token = localStorage.getItem("token");
   const history = useHistory();
-
-  function showProfileMessage(text, modifier) {
-    setProfileMessage(text);
-    setProfileMessageModifier(modifier);
-    setTimeout(() => setProfileMessageModifier(""), NOTIFICATION_DURATION);
-  }
-
-  function showPopupError(text = "Что-то пошло не так") {
-    setPopupError(text);
-    setPopupErrorStatus(true);
-    setTimeout(() => setPopupErrorStatus(false), NOTIFICATION_DURATION);
-  }
 
   useEffect(() => {
     if (token && !popupErrorStatus) {
@@ -85,7 +73,19 @@ function App() {
     }
   }, [currentUser._id, setSavedMovies, token, popupErrorStatus]);
 
-  function registerUser(name, email, password) {
+  const showProfileMessage = (text, modifier) => {
+    setProfileMessage(text);
+    setProfileMessageModifier(modifier);
+    setTimeout(() => setProfileMessageModifier(""), NOTIFICATION_DURATION);
+  }
+
+  const showPopupError = (text = "Что-то пошло не так") => {
+    setPopupError(text);
+    setPopupErrorStatus(true);
+    setTimeout(() => setPopupErrorStatus(false), NOTIFICATION_DURATION);
+  }
+
+  const registerUser = (name, email, password) => {
     setIsLoading(true);
     auth
       .register(name, email, password)
@@ -105,7 +105,7 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
-  function loginUser(email, password) {
+  const loginUser = (email, password) => {
     setIsLoading(true);
     auth
       .authorize(email, password)
@@ -127,7 +127,7 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
-  function updateUserInfo(userDataFromForm) {
+  const updateUserInfo = (userDataFromForm) => {
     setIsLoading(true);
     mainApi
       .editCurrentUserInfo(userDataFromForm, token)
@@ -203,6 +203,6 @@ function App() {
       </div>
     </currentUserContext.Provider>
   );
-}
+};
 
 export default App;

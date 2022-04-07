@@ -2,14 +2,14 @@ import React from "react";
 
 import "./Button.css";
 
-function Button({
+const Button = ({
   children,
   className,
   type = "button",
   handler,
   isFormValid = true,
   isLoading,
-}) {
+}) => {
   return (
     <button
       className={`button ${className}`}
@@ -20,6 +20,6 @@ function Button({
       {children}
     </button>
   );
-}
+};
 
 export default Button;

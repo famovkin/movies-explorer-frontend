@@ -7,7 +7,13 @@ import { countInputs } from "../../utils/countInputs";
 import Icons from "../Icons";
 import "./SearchForm.css";
 
-function SearchForm({ submitHandler, checkbox, setCheckbox, lastSearchQuery, isLoading }) {
+const SearchForm = ({
+  submitHandler,
+  checkbox,
+  setCheckbox,
+  lastSearchQuery,
+  isLoading,
+}) => {
   const [errorText, setErrorText] = useState("");
   const {
     values,
@@ -75,7 +81,12 @@ function SearchForm({ submitHandler, checkbox, setCheckbox, lastSearchQuery, isL
         </Button>
       </div>
       <span className="search-form__error">{errorText}</span>
-      <label className={`search-form__label ${isLoading && "search-form__label_disabled"}`} htmlFor="short-film">
+      <label
+        className={`search-form__label ${
+          isLoading && "search-form__label_disabled"
+        }`}
+        htmlFor="short-film"
+      >
         <input
           className="search-form__radio"
           type="checkbox"
@@ -93,6 +104,6 @@ function SearchForm({ submitHandler, checkbox, setCheckbox, lastSearchQuery, isL
       </label>
     </form>
   );
-}
+};
 
 export default SearchForm;

@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Input.css";
 
-function Input({ name, label, error, modifier, ...props }) {
+const Input = ({ name, label, error, modifier, ...props }) => {
   return (
     <>
       <div className={`input app__input input_type_${modifier}`}>
@@ -26,6 +26,6 @@ function Input({ name, label, error, modifier, ...props }) {
       </span>
     </>
   );
-}
+};
 
 export default Input;

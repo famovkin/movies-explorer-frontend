@@ -8,7 +8,7 @@ import { UseCheckFormValidity } from "../../hooks/UseCheckFormValidity";
 import { countInputs } from "../../utils/countInputs";
 import "./Register.css";
 
-function Register({ submitHandler, isLoading, message, setMessage }) {
+const Register = ({ submitHandler, isLoading, message, setMessage }) => {
   const { values, errors, handleChange, isFormValid, setIsFormValid } =
     UseCustomValidation();
   const amountInputs = countInputs(".input");
@@ -85,6 +85,6 @@ function Register({ submitHandler, isLoading, message, setMessage }) {
       </form>
     </UnauthPage>
   );
-}
+};
 
 export default Register;

@@ -6,7 +6,7 @@ import TechIcon from "../TechIcon/TechIcon";
 import { STACK } from "../../utils/constants";
 import "./Techs.css";
 
-function Techs() {
+const Techs = () => {
   return (
     <section className="techs" id="techs">
       <Container modifier="container_type_landing">
@@ -26,6 +26,6 @@ function Techs() {
       </Container>
     </section>
   );
-}
+};
 
 export default Techs;

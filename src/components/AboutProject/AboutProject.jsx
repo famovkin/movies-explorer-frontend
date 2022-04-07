@@ -7,7 +7,7 @@ import Title from "../Title/Title";
 import { diplomaTextCards } from "../../utils/constants";
 import "./AboutProject.css";
 
-function AboutProject() {
+const AboutProject = () => {
   return (
     <Container modifier="container_type_landing">
       <section className="about" id="about">
@@ -21,6 +21,6 @@ function AboutProject() {
       </section>
     </Container>
   );
-}
+};
 
 export default AboutProject;

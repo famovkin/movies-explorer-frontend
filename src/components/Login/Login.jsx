@@ -8,7 +8,7 @@ import { UseCheckFormValidity } from "../../hooks/UseCheckFormValidity";
 import { countInputs } from "../../utils/countInputs";
 import "./Login.css";
 
-function Login({ submitHandler, isLoading, message, setMessage }) {
+const Login = ({ submitHandler, isLoading, message, setMessage }) => {
   const { values, errors, handleChange, isFormValid, setIsFormValid } =
     UseCustomValidation();
   const amountInputs = countInputs(".input");
@@ -74,6 +74,6 @@ function Login({ submitHandler, isLoading, message, setMessage }) {
       </form>
     </UnauthPage>
   );
-}
+};
 
 export default Login;

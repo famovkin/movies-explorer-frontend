@@ -1,9 +1,9 @@
 import React from "react";
-import NavTab from "../NavTab/NavTab";
 
+import NavTab from "../NavTab/NavTab";
 import "./Promo.css";
 
-function Promo() {
+const Promo = () => {
   return (
     <section className="promo main__promo">
       <h1 className="promo__title">
@@ -12,6 +12,6 @@ function Promo() {
       <NavTab />
     </section>
   );
-}
+};
 
 export default Promo;

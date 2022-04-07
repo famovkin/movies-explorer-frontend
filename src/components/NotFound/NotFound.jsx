@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import Button from "../Button/Button";
 import "./NotFound.css";
 
-function NotFound() {
+const NotFound = () => {
   const history = useHistory();
   const backHandler = () => history.goBack();
 
@@ -21,6 +21,6 @@ function NotFound() {
       </div>
     </section>
   );
-}
+};
 
 export default NotFound;

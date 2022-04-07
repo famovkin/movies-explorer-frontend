@@ -5,7 +5,7 @@ import AccountButton from "../AccountButton/AccountButton";
 import Icons from "../Icons/";
 import "./Sidebar.css";
 
-function Sidebar({ isOpen, closeHandler }) {
+const Sidebar = ({ isOpen, closeHandler }) => {
   return (
     <div className={`app__overlay ${isOpen ? "app__overlay_visible" : ""}`}>
       <div
@@ -42,6 +42,6 @@ function Sidebar({ isOpen, closeHandler }) {
       </div>
     </div>
   );
-}
+};
 
 export default Sidebar;

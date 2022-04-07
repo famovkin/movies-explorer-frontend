@@ -5,9 +5,7 @@ import Container from "../Container/Container";
 import { footerLinks } from "../../utils/constants";
 import "./Footer.css";
 
-
-
-function Footer() {
+const Footer = () => {
   return (
     <footer className="footer">
       <Container>
@@ -25,6 +23,6 @@ function Footer() {
       </Container>
     </footer>
   );
-}
+};
 
 export default Footer;

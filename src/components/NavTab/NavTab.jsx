@@ -3,7 +3,7 @@ import React from "react";
 import { navTabs } from "../../utils/constants";
 import "./NavTab.css";
 
-function NavTab() {
+const NavTab = () => {
   return (
     <nav className="nav-tab">
       {navTabs.map((tab) => (
@@ -13,6 +13,6 @@ function NavTab() {
       ))}
     </nav>
   );
-}
+};
 
 export default NavTab;

@@ -9,12 +9,12 @@ import { mainApi } from "../../utils/MainApi";
 import { findOnlyShortMovies, filterMovies } from "../../utils/filters";
 import "./SavedMovies.css";
 
-function SavedMovies({
+const SavedMovies = ({
   savedMovies,
   setSavedMovies,
   message,
   cardErrorHandler,
-}) {
+}) => {
   const [shortFilmsCheck, setShortFilmsCheck] = useState(false);
   // создаем дополнительный стейт, который будем отрисовывать
   const [moviesForRender, setMoviesForRender] = useState(savedMovies);
@@ -80,6 +80,6 @@ function SavedMovies({
       <Footer />
     </div>
   );
-}
+};
 
 export default SavedMovies;

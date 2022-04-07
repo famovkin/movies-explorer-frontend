@@ -7,7 +7,7 @@ import Project from "../Project/Project";
 import photo from "../../images/avatar.jpeg";
 import "./AboutMe.css";
 
-function AboutMe() {
+const AboutMe = () => {
   const links = [
     {
       id: 1,
@@ -54,9 +54,9 @@ function AboutMe() {
             <p className="student__description">
               Я живу в Гусь-Хрустальном, закончил факультет информационной
               безопасности в РосНОУ. С 2021 года начал я изучать веб-разработку.
-              Мне нравится писать код, создавать удобные приложения и
-              постоянно узучать что-то новое для себя. В свободное время я рисую
-              портреты и ещё увлекаюсь моддингом клавиатур.
+              Мне нравится писать код, создавать удобные приложения и постоянно
+              узучать что-то новое для себя. В свободное время я рисую портреты
+              и ещё увлекаюсь моддингом клавиатур.
             </p>
             <ul className="student__socials">
               {links.map((link) => (
@@ -77,6 +77,6 @@ function AboutMe() {
       </section>
     </Container>
   );
-}
+};
 
 export default AboutMe;

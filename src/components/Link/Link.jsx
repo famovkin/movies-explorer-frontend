@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Link.css";
 
-function Link({ title, url, modifier }) {
+const Link = ({ title, url, modifier }) => {
   return (
     <li className="link">
       <a
@@ -15,6 +15,6 @@ function Link({ title, url, modifier }) {
       </a>
     </li>
   );
-}
+};
 
 export default Link;
