@@ -28,6 +28,7 @@ const SearchForm = ({
   UseCheckFormValidity(values, errors, amountInputs, setIsFormValid);
 
   useEffect(() => {
+    // отображаем последний запрос, если он есть
     if (lastSearchQuery) {
       setValues({ ...values, "film-query": lastSearchQuery });
     }

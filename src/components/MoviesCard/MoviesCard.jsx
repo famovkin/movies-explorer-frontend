@@ -21,12 +21,15 @@ const MoviesCard =({
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
+    // окрашиваем кнопку лайка, если он фильм нашелся в сохраненных
     if (savedMovies.some((movie) => movie.movieId === props.id)) {
       setIsSaved(true);
     }
   }, [savedMovies, props.id]);
 
   const handleSave = () => {
+    // создаем объект фильма для сохранения
+    // добавляем дефолтные значения
     const movieData = {
       country: props.country || UNKNOWN_CARD_TEXT,
       director: props.director || UNKNOWN_CARD_TEXT,
@@ -44,6 +47,8 @@ const MoviesCard =({
   };
 
   const handleDelete = () => {
+    // условие для удаления с обоих страниц
+    // так как ключи в объектах отличаются
     onDeleteHandler(props._id || props.id, setIsSaved);
   };
 

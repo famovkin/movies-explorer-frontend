@@ -34,6 +34,7 @@ const App = () => {
   const token = localStorage.getItem("token");
   const history = useHistory();
 
+  // логинимся
   useEffect(() => {
     if (token && !popupErrorStatus) {
       setIsLoggedIn(true);
@@ -41,6 +42,7 @@ const App = () => {
     }
   }, [token, isLoggedIn, history]);
 
+  // сохраняем в контекст пользователя
   useEffect(() => {
     if (isLoggedIn) {
       mainApi
@@ -54,6 +56,7 @@ const App = () => {
     }
   }, [token, isLoggedIn, history]);
 
+  // получаем список фильмов, сохраненных пользователем
   useEffect(() => {
     if (isLoggedIn && !popupErrorStatus) {
       mainApi

@@ -39,9 +39,11 @@ const SavedMovies = ({
   };
 
   const submitHandler = (isOnlyShortFilms, searchQuery) => {
+    // фильтруем
     const filteredMovies = filterMovies(searchQuery, savedMovies);
     const filteredShortMovies = findOnlyShortMovies(filteredMovies);
 
+    // следим при этом за чекбоксом
     isOnlyShortFilms
       ? setMoviesForRender(filteredShortMovies)
       : setMoviesForRender(filteredMovies);

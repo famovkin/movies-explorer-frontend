@@ -15,6 +15,7 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { currentUser } = useContext(currentUserContext);
 
+  // если пользователь есть в контексте, задаем соответствующий стейт,
   useEffect(() => {
     currentUser.name === ""
       ? setIsLoggedIn(false)

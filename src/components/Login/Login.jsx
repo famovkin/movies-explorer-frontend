@@ -9,8 +9,10 @@ import { countInputs } from "../../utils/countInputs";
 import "./Login.css";
 
 const Login = ({ submitHandler, isLoading, message, setMessage }) => {
+  // получаем необходимые данные из хука валидации
   const { values, errors, handleChange, isFormValid, setIsFormValid } =
     UseCustomValidation();
+  // получаем кол-во инпутов, которое нужно для валидации
   const amountInputs = countInputs(".input");
 
   UseCheckFormValidity(values, errors, amountInputs, setIsFormValid);

@@ -31,11 +31,14 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
   const [shortFilmsCheck, setShortFilmsCheck] = useState(false);
   const [lastSearchQuery, setLastSearchQuery] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const cardsCount = initialCardsAmount + cardsInBundle * cardsPage;
+  const cardsCount = initialCardsAmount + cardsInBundle * cardsPage; // кол-во карточек, которые отобразятся
+  // cardsPage меняется по клику на кнопку "Еще"
+  // cardsInBundle и initialCardsAmount меняются конфигом
   const width = UseGetWidthBrowser();
   const queryData = localStorage.getItem("queryData");
   const token = localStorage.getItem("token");
 
+  // меняет отрисовку карточек от ширины экрана
   useEffect(() => {
     if (width >= LAPTOP_WIDTH) {
       setInitialCards(LARGE.firstPageCount);
@@ -52,6 +55,7 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
   let filteredMovies = JSON.parse(queryData)?.filteredMovies || [];
   let filteredShortMovies = JSON.parse(queryData)?.filteredShortMovies || [];
 
+  // получаем последний запрос и состояние чекбокса
   useEffect(() => {
     if (queryData) {
       setLastSearchQuery(JSON.parse(queryData)?.searchQuery);
@@ -59,6 +63,7 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
     }
   }, [queryData]);
 
+  // если нет ошибок, меняем блок результатов в зависимости от чекбокса
   useEffect(() => {
     if (!errorMessage) {
       shortFilmsCheck
@@ -70,9 +75,12 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
   const submitHandler = async (isOnlyShortFilms, searchQuery) => {
     try {
       setIsLoading(true);
+      // получаем все фильмы
       const allMovies = await beatFilmApi.getMovies();
-      filteredMovies = await filterMovies(searchQuery, allMovies);
+      // фильтруем
+      filteredMovies = filterMovies(searchQuery, allMovies);
       filteredShortMovies = findOnlyShortMovies(filteredMovies);
+      // создаем объект для сохранения в localStorage
       const queryData = {
         filteredMovies,
         filteredShortMovies,
@@ -81,7 +89,9 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
       };
       localStorage.setItem("queryData", JSON.stringify(queryData));
 
+      // следим за чекбоксом выводим результат
       isOnlyShortFilms
+        // отображаем только первоначальное кол-во карточек, используя slice
         ? setMovies(filteredShortMovies.slice(0, initialCardsAmount))
         : setMovies(filteredMovies.slice(0, initialCardsAmount));
 
@@ -95,6 +105,7 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
     }
   };
 
+  // делаем на 1 страницу больше
   const moreButtonHandler = () => setCardsPage((prev) => prev + 1);
 
   const MoreButton = ({ displayed }) => (
@@ -110,7 +121,9 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
     mainApi
       .createMovie(movie, token)
       .then((newMovie) => {
+        // после ответа добавляем новый фильм в стейт
         setSavedMovies([...savedMovies, newMovie]);
+        // меняем кнопку
         likeHandler(true);
       })
       .catch((e) => e.json())
@@ -128,6 +141,7 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
       .removeMovie(idInSavedMovies, token)
       .then(() => {
         likeHandler(false);
+        // убираем удаленный фильм из стейта
         setSavedMovies((state) =>
           state.filter((m) => m._id !== idInSavedMovies)
         );

@@ -39,6 +39,7 @@ const Profile = ({
     currentUserData
   );
 
+  // отображаем текущие данные в инпутах
   useEffect(() => {
     setValues({
       name: currentUser.name,
