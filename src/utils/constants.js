@@ -1,3 +1,36 @@
+export const socialLinks = [
+  {
+    id: 1,
+    title: "Github",
+    url: "https://github.com/famovkin",
+    modifier: "medium",
+  },
+  {
+    id: 2,
+    title: "Telegram",
+    url: "https://t.me/famovkin",
+    modifier: "medium",
+  },
+];
+
+export const projects = [
+  {
+    id: 1,
+    title: "Статичный сайт",
+    url: "https://famovkin.github.io/how-to-learn/",
+  },
+  {
+    id: 2,
+    title: "Адаптивный сайт",
+    url: "https://famovkin.github.io/russian-travel/",
+  },
+  {
+    id: 3,
+    title: "Одностраничное приложение",
+    url: "https://mesto.nomoredomains.xyz/",
+  },
+];
+
 export const footerLinks = [
   {
     id: 1,

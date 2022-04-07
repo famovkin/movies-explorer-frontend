@@ -5,42 +5,10 @@ import Container from "../Container/Container";
 import Link from "../Link/Link";
 import Project from "../Project/Project";
 import photo from "../../images/avatar.jpeg";
+import { socialLinks, projects } from "../../utils/constants";
 import "./AboutMe.css";
 
 const AboutMe = () => {
-  const links = [
-    {
-      id: 1,
-      title: "Github",
-      url: "https://github.com/famovkin",
-      modifier: "medium",
-    },
-    {
-      id: 2,
-      title: "Telegram",
-      url: "https://t.me/famovkin",
-      modifier: "medium",
-    },
-  ];
-
-  const projects = [
-    {
-      id: 1,
-      title: "Статичный сайт",
-      url: "https://famovkin.github.io/how-to-learn/",
-    },
-    {
-      id: 2,
-      title: "Адаптивный сайт",
-      url: "https://famovkin.github.io/russian-travel/",
-    },
-    {
-      id: 3,
-      title: "Одностраничное приложение",
-      url: "https://mesto.nomoredomains.xyz/",
-    },
-  ];
-
   return (
     <Container modifier="container_type_landing">
       <section className="about-me main__about-me" id="student">
@@ -59,7 +27,7 @@ const AboutMe = () => {
               и ещё увлекаюсь моддингом клавиатур.
             </p>
             <ul className="student__socials">
-              {links.map((link) => (
+              {socialLinks.map((link) => (
                 <Link key={link.id} {...link} />
               ))}
             </ul>
