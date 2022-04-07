@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export const UseCheckFormValidity = (
+export const useFormValidity = (
   values,
   errors,
   amountInputs,

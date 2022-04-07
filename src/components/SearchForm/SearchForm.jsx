@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import Button from "../Button/Button";
-import { UseCustomValidation } from "../../hooks/UseCustomValidation";
-import { UseCheckFormValidity } from "../../hooks/UseCheckFormValidity";
+import { useCustomValidation } from "../../hooks/useCustomValidation";
+import { useFormValidity } from "../../hooks/useFormValidity";
 import { countInputs } from "../../utils/countInputs";
 import Icons from "../Icons";
 import "./SearchForm.css";
@@ -22,10 +22,10 @@ const SearchForm = ({
     handleChange,
     isFormValid,
     setIsFormValid,
-  } = UseCustomValidation();
+  } = useCustomValidation();
   const amountInputs = countInputs(".search-form__input");
 
-  UseCheckFormValidity(values, errors, amountInputs, setIsFormValid);
+  useFormValidity(values, errors, amountInputs, setIsFormValid);
 
   useEffect(() => {
     // отображаем последний запрос, если он есть

@@ -3,19 +3,19 @@ import React, { useEffect } from "react";
 import UnauthPage from "../UnauthPage/UnauthPage";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
-import { UseCustomValidation } from "../../hooks/UseCustomValidation";
-import { UseCheckFormValidity } from "../../hooks/UseCheckFormValidity";
+import { useCustomValidation } from "../../hooks/useCustomValidation";
+import { useFormValidity } from "../../hooks/useFormValidity";
 import { countInputs } from "../../utils/countInputs";
 import "./Login.css";
 
 const Login = ({ submitHandler, isLoading, message, setMessage }) => {
   // получаем необходимые данные из хука валидации
   const { values, errors, handleChange, isFormValid, setIsFormValid } =
-    UseCustomValidation();
+    useCustomValidation();
   // получаем кол-во инпутов, которое нужно для валидации
   const amountInputs = countInputs(".input");
 
-  UseCheckFormValidity(values, errors, amountInputs, setIsFormValid);
+  useFormValidity(values, errors, amountInputs, setIsFormValid);
 
   useEffect(() => setMessage(""), [setMessage]);
 

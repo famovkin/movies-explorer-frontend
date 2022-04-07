@@ -3,7 +3,7 @@ import validator from "validator";
 
 import { deleteKeyFromObj } from "../utils/deleteKeyFromObj";
 
-export const UseCustomValidation = (currentName, currentEmail) => {
+export const useCustomValidation = (currentName, currentEmail) => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);

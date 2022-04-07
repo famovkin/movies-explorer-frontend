@@ -5,8 +5,8 @@ import Header from "../Header/Header";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import currentUserContext from "../../context/currentUserContext";
-import { UseCustomValidation } from "../../hooks/UseCustomValidation";
-import { UseCheckFormValidity } from "../../hooks/UseCheckFormValidity";
+import { useCustomValidation } from "../../hooks/useCustomValidation";
+import { useFormValidity } from "../../hooks/useFormValidity";
 import { countInputs } from "../../utils/countInputs";
 import "./Profile.css";
 
@@ -27,11 +27,11 @@ const Profile = ({
     handleChange,
     isFormValid,
     setIsFormValid,
-  } = UseCustomValidation(currentUser.name, currentUser.email);
+  } = useCustomValidation(currentUser.name, currentUser.email);
   const history = useHistory();
   const amountInputs = countInputs(".input");
 
-  UseCheckFormValidity(
+  useFormValidity(
     values,
     errors,
     amountInputs,

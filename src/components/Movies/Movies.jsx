@@ -10,7 +10,7 @@ import Preloader from "../Preloader/Preloader";
 import { findOnlyShortMovies, filterMovies } from "../../utils/filters";
 import { beatFilmApi } from "../../utils/MoviesApi";
 import { getOneIdByAnother } from "../../utils/getOneIdByAnother";
-import { UseGetWidthBrowser } from "../../hooks/UseGetWidthBrowse";
+import { useGetWidthBrowser } from "../../hooks/useGetWidthBrowser";
 import { DEFAULT_ERROR_MESSAGE } from "../../utils/constants";
 import { mainApi } from "../../utils/MainApi";
 import {
@@ -34,7 +34,7 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
   const cardsCount = initialCardsAmount + cardsInBundle * cardsPage; // кол-во карточек, которые отобразятся
   // cardsPage меняется по клику на кнопку "Еще"
   // cardsInBundle и initialCardsAmount меняются конфигом
-  const width = UseGetWidthBrowser();
+  const width = useGetWidthBrowser();
   const queryData = localStorage.getItem("queryData");
   const token = localStorage.getItem("token");
 
