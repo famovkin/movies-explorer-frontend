@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Container from "../Container/Container";
 import Footer from "../Footer/Footer";
@@ -19,6 +19,8 @@ const SavedMovies = ({
   // создаем дополнительный стейт, который будем отрисовывать
   const [moviesForRender, setMoviesForRender] = useState(savedMovies);
   const token = localStorage.getItem("token");
+
+  useEffect(() => setMoviesForRender(savedMovies), [savedMovies])
 
   const deleteMovie = (movieId, likeHandler) => {
     mainApi
