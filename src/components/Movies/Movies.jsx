@@ -35,6 +35,7 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
   const [shortFilmsCheck, setShortFilmsCheck] = useState(false);
   const [lastSearchQuery, setLastSearchQuery] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [resultMessage, setResultMessage] = useState("");
   const cardsCount = initialCardsAmount + cardsInBundle * cardsPage; // кол-во карточек, которые отобразятся
   // cardsPage меняется по клику на кнопку "Еще"
   // cardsInBundle и initialCardsAmount меняются конфигом
@@ -118,10 +119,18 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
       localStorage.setItem("queryData", JSON.stringify(queryData));
 
       // следим за чекбоксом выводим результат
-      isOnlyShortFilms
+      if (isOnlyShortFilms) {
         // отображаем только первоначальное кол-во карточек, используя slice
-        ? setMovies(filteredShortMovies.slice(0, initialCardsAmount))
-        : setMovies(filteredMovies.slice(0, initialCardsAmount));
+        setMovies(filteredShortMovies.slice(0, initialCardsAmount));
+        if (filteredShortMovies.length === 0) {
+          setResultMessage("Ничего не найдено");
+        }
+      } else {
+        setMovies(filteredMovies.slice(0, initialCardsAmount));
+        if (filteredShortMovies.length === 0) {
+          setResultMessage("Ничего не найдено");
+        }
+      }
 
       setErrorMessage("");
       setIsLoading(false);
@@ -134,7 +143,8 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
   };
 
   // делаем на 1 страницу больше
-  const moreButtonHandler = () => setCardsPage((prev) => prev + ADDING_PAGE_AMOUNT);
+  const moreButtonHandler = () =>
+    setCardsPage((prev) => prev + ADDING_PAGE_AMOUNT);
 
   const MoreButton = ({ displayed }) => (
     <Button
@@ -206,10 +216,8 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
               onSavedPage={false}
             />
           )}
-          {!isLoading && movies.length === 0 && (
-            <p className="movies__message">
-              {errorMessage || "Ничего не найдено"}
-            </p>
+          {!isLoading && (
+            <p className="movies__message">{errorMessage || resultMessage}</p>
           )}
           <div className="movies__footer">
             {shortFilmsCheck

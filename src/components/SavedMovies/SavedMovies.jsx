@@ -18,9 +18,16 @@ const SavedMovies = ({
   const [shortFilmsCheck, setShortFilmsCheck] = useState(false);
   // создаем дополнительный стейт, который будем отрисовывать
   const [moviesForRender, setMoviesForRender] = useState(savedMovies);
+  const [resultMessage, setResultMessage] = useState("");
   const token = localStorage.getItem("token");
 
-  useEffect(() => setMoviesForRender(savedMovies), [savedMovies])
+  useEffect(() => setMoviesForRender(savedMovies), [savedMovies]);
+
+  useEffect(() => {
+    if (message) {
+      setResultMessage(message);
+    }
+  }, [message]);
 
   const deleteMovie = (movieId, likeHandler) => {
     mainApi
@@ -46,9 +53,17 @@ const SavedMovies = ({
     const filteredShortMovies = findOnlyShortMovies(filteredMovies);
 
     // следим при этом за чекбоксом
-    isOnlyShortFilms
-      ? setMoviesForRender(filteredShortMovies)
-      : setMoviesForRender(filteredMovies);
+    if (isOnlyShortFilms) {
+      setMoviesForRender(filteredShortMovies);
+      if (filteredShortMovies.length === 0 && !message) {
+        setResultMessage("Ничего не найдено");
+      }
+    } else {
+      setMoviesForRender(filteredMovies);
+      if (filteredMovies.length === 0 && !message) {
+        setResultMessage("Ничего не найдено");
+      }
+    }
   };
 
   return (
@@ -71,14 +86,7 @@ const SavedMovies = ({
               onSavedPage={true}
             />
           )}
-          {message && (
-            <p className="movies__message movies__message_type_error">
-              {message}
-            </p>
-          )}
-          {moviesForRender.length === 0 && !message && (
-            <p className="movies__message">{"Ничего не найдено"}</p>
-          )}
+          <p className="movies__message">{resultMessage}</p>
         </section>
       </Container>
       <Footer />
