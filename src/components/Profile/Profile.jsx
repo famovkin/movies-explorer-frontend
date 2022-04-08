@@ -51,6 +51,7 @@ const Profile = ({
     localStorage.removeItem("token");
     localStorage.removeItem("queryData");
     localStorage.removeItem("savedMovies");
+    localStorage.removeItem("allMoviesData");
     setIsLoggedIn(false);
     history.push("/");
     setCurrentUser({

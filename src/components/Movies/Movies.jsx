@@ -41,6 +41,7 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
   const width = useGetWidthBrowser();
   const queryData = localStorage.getItem("queryData");
   const token = localStorage.getItem("token");
+  let allMovies = localStorage.getItem("allMoviesData");
 
   // меняет отрисовку карточек от ширины экрана
   useEffect(() => {
@@ -85,13 +86,27 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
     }
   }, [shortFilmsCheck, queryData]);
 
+  // удаляем данные о всех фильмах при обновлении страницы
+  useEffect(() => {
+    window.addEventListener("beforeunload", removeAllMoviesData);
+    return () => {
+      window.removeEventListener("beforeunload", removeAllMoviesData);
+    };
+  }, []);
+
+  const removeAllMoviesData = () => localStorage.removeItem("allMoviesData");
+
   const submitHandler = async (isOnlyShortFilms, searchQuery) => {
     try {
       setIsLoading(true);
       // получаем все фильмы
-      const allMovies = await beatFilmApi.getMovies();
+      if (!allMovies) {
+        const allMoviesData = await beatFilmApi.getMovies();
+        localStorage.setItem("allMoviesData", JSON.stringify(allMoviesData));
+        allMovies = localStorage.getItem("allMoviesData");
+      }
       // фильтруем
-      filteredMovies = filterMovies(searchQuery, allMovies);
+      filteredMovies = filterMovies(searchQuery, JSON.parse(allMovies));
       filteredShortMovies = findOnlyShortMovies(filteredMovies);
       // создаем объект для сохранения в localStorage
       const queryData = {
