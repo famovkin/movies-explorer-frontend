@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory, useLocation } from "react-router-dom";
 
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
@@ -33,14 +33,19 @@ const App = () => {
   const [popupErrorStatus, setPopupErrorStatus] = useState(false);
   const token = localStorage.getItem("token");
   const history = useHistory();
+  const location = useLocation();
 
   // логинимся
   useEffect(() => {
     if (token && !popupErrorStatus) {
       setIsLoggedIn(true);
-      history.push("/movies");
+      if (location.pathname === "/signup" || location.pathname === "/signin") {
+        history.push("/movies");
+      } else {
+        history.push(location.pathname);
+      }
     }
-  }, [token, isLoggedIn, history]);
+  }, [token, isLoggedIn, history, location.pathname]);
 
   // сохраняем в контекст пользователя
   useEffect(() => {
@@ -155,7 +160,6 @@ const App = () => {
           <ProtectedRoute
             component={Movies}
             isLoggedIn={isLoggedIn}
-            exact
             path="/movies"
             savedMovies={savedMovies}
             setSavedMovies={setSavedMovies}
@@ -164,7 +168,6 @@ const App = () => {
           <ProtectedRoute
             component={SavedMovies}
             isLoggedIn={isLoggedIn}
-            exact
             path="/saved-movies"
             savedMovies={savedMovies}
             setSavedMovies={setSavedMovies}
@@ -175,7 +178,6 @@ const App = () => {
             component={Profile}
             isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
-            exact
             path="/profile"
             submitHandler={updateUserInfo}
             isLoading={isLoading}
