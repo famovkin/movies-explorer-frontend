@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from "react";
 
-import { LAPTOP_WIDTH } from "../utils/paginationConfig";
+import { LAPTOP_WIDTH } from "../utils/constants";
 
 export const useGetWidthBrowser = () => {
   const [width, setWidth] = useState(LAPTOP_WIDTH);

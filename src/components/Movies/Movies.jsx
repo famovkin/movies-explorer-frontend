@@ -11,15 +11,19 @@ import { findOnlyShortMovies, filterMovies } from "../../utils/filters";
 import { beatFilmApi } from "../../utils/MoviesApi";
 import { getOneIdByAnother } from "../../utils/getOneIdByAnother";
 import { useGetWidthBrowser } from "../../hooks/useGetWidthBrowser";
-import { DEFAULT_ERROR_MESSAGE } from "../../utils/constants";
 import { mainApi } from "../../utils/MainApi";
 import {
-  LARGE,
-  MEDIUM,
-  SMALL,
+  DEFAULT_ERROR_MESSAGE,
   MOBILE_WIDTH,
   LAPTOP_WIDTH,
-} from "../../utils/paginationConfig";
+  LARGE_PAGE_CARDS_COUNT,
+  LARGE_NEXT_PAGE_CARDS_COUNT,
+  MEDIUM_PAGE_CARDS_COUNT,
+  MEDIUM_NEXT_PAGE_CARDS_COUNT,
+  SMALL_PAGE_CARDS_COUNT,
+  SMALL_NEXT_PAGE_CARDS_COUNT,
+  ADDING_PAGE_AMOUNT,
+} from "../../utils/constants";
 import "./Movies.css";
 
 const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
@@ -41,14 +45,14 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
   // меняет отрисовку карточек от ширины экрана
   useEffect(() => {
     if (width >= LAPTOP_WIDTH) {
-      setInitialCards(LARGE.firstPageCount);
-      setCardsInBundle(LARGE.nextPageCount);
+      setInitialCards(LARGE_PAGE_CARDS_COUNT);
+      setCardsInBundle(LARGE_NEXT_PAGE_CARDS_COUNT);
     } else if (width > MOBILE_WIDTH && width < LAPTOP_WIDTH) {
-      setInitialCards(MEDIUM.firstPageCount);
-      setCardsInBundle(MEDIUM.nextPageCount);
+      setInitialCards(MEDIUM_PAGE_CARDS_COUNT);
+      setCardsInBundle(MEDIUM_NEXT_PAGE_CARDS_COUNT);
     } else if (width <= MOBILE_WIDTH) {
-      setInitialCards(SMALL.firstPageCount);
-      setCardsInBundle(SMALL.nextPageCount);
+      setInitialCards(SMALL_PAGE_CARDS_COUNT);
+      setCardsInBundle(SMALL_NEXT_PAGE_CARDS_COUNT);
     }
   }, [width]);
 
@@ -106,7 +110,7 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
   };
 
   // делаем на 1 страницу больше
-  const moreButtonHandler = () => setCardsPage((prev) => prev + 1);
+  const moreButtonHandler = () => setCardsPage((prev) => prev + ADDING_PAGE_AMOUNT);
 
   const MoreButton = ({ displayed }) => (
     <Button

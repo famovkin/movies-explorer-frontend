@@ -1,3 +1,5 @@
+import { MAX_DURATION_SHORT_FILM } from "./constants";
+
 export const filterMovies = (searchQuery, moviesArray) => {
   return moviesArray.filter((movie) =>
     movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase())
@@ -5,5 +7,5 @@ export const filterMovies = (searchQuery, moviesArray) => {
 };
 
 export const findOnlyShortMovies = (movies) => {
-  return movies.filter((movie) => movie.duration < 40);
+  return movies.filter((movie) => movie.duration < MAX_DURATION_SHORT_FILM);
 };
