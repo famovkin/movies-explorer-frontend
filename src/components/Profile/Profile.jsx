@@ -50,6 +50,7 @@ const Profile = ({
   const signOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("queryData");
+    localStorage.removeItem("savedMovies");
     setIsLoggedIn(false);
     history.push("/");
     setCurrentUser({
