@@ -65,7 +65,7 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
       setLastSearchQuery(JSON.parse(queryData)?.searchQuery);
       setShortFilmsCheck(JSON.parse(queryData)?.isOnlyShortFilms);
     }
-  }, [queryData]);
+  }, []);
 
   // если нет ошибок, меняем блок результатов в зависимости от чекбокса
   useEffect(() => {
@@ -75,6 +75,15 @@ const Movies = ({ savedMovies, setSavedMovies, cardErrorHandler }) => {
         : setMovies(filteredMovies.slice(0, cardsCount));
     }
   }, [shortFilmsCheck, cardsCount, errorMessage]);
+
+  // сохраняем состояние чекбокса при его изменении
+  useEffect(() => {
+    if (queryData) {
+      const updatedQueryData = JSON.parse(queryData);
+      updatedQueryData.isOnlyShortFilms = shortFilmsCheck;
+      localStorage.setItem("queryData", JSON.stringify(updatedQueryData));
+    }
+  }, [shortFilmsCheck, queryData]);
 
   const submitHandler = async (isOnlyShortFilms, searchQuery) => {
     try {
