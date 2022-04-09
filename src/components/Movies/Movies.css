@@ -41,3 +41,34 @@
     width: 240px;
   }
 }
+
+.movies__message {
+  width: 65%;
+  margin: 0 auto;
+  text-align: center;
+  height: 80px;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .movies__message {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .movies__message {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 500px) {
+  .movies__message {
+    font-size: 13px;
+  }
+}
+
+.button_type_hidden {
+  display: none;
+}

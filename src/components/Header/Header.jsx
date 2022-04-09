@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 import Icons from "../Icons";
@@ -7,12 +7,20 @@ import Container from "../Container/Container";
 import AccountButton from "../AccountButton/AccountButton";
 import Sidebar from "../Sidebar/Sidebar";
 import Logo from "../Logo/Logo";
-
+import currentUserContext from "../../context/currentUserContext";
 import "./Header.css";
 
-function Header() {
+const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const isAuth = false; // для смены кнопок
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { currentUser } = useContext(currentUserContext);
+
+  // если пользователь есть в контексте, задаем соответствующий стейт,
+  useEffect(() => {
+    currentUser.name === ""
+      ? setIsLoggedIn(false)
+      : setIsLoggedIn(true);
+    }, [currentUser.name])
 
   const sidebarHandler = () => setIsSidebarOpen(!isSidebarOpen);
 
@@ -23,7 +31,9 @@ function Header() {
           <Link className="header__linked-logo" to="/">
             <Logo className="logo header__logo" />
           </Link>
-          <div className="header__links">
+          <div className={`header__links ${isLoggedIn
+            ? ""
+            : "header__links_type_hidden"}`}>
             <NavLink
               className="header__link"
               activeClassName="header__link_active"
@@ -41,9 +51,9 @@ function Header() {
           </div>
         </nav>
         <div className="header__account-menu">
-          {isAuth ? (
+          {isLoggedIn ? (
             <Link className="header__linked-button" to="/profile">
-              <AccountButton modifier="button_type_hidden" />
+              <AccountButton modifier="button_type_account-hidden" />
             </Link>
           ) : (
             <>
@@ -60,7 +70,7 @@ function Header() {
             </>
           )}
         </div>
-        {isAuth && (
+        {isLoggedIn && (
           <Icons.Burger
             className="header__burger-icon"
             handler={sidebarHandler}
@@ -70,6 +80,6 @@ function Header() {
       </header>
     </Container>
   );
-}
+};
 
 export default Header;

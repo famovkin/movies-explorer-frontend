@@ -3,13 +3,13 @@
 }
 
 .register__inputs {
-  margin: 0 0 72px;
   padding: 0;
   border: none;
+  margin: 0 0 40px;
 }
 
 @media (max-width: 500px) {
   .register__inputs {
-    margin-bottom: 161px;
+    margin-bottom: 132px;
   }
 }

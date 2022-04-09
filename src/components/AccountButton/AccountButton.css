@@ -21,7 +21,7 @@
 }
 
 @media (max-width: 768px) {
-  .button_type_hidden {
+  .button_type_account-hidden {
     display: none;
   }
 }

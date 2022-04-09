@@ -2,27 +2,10 @@ import React from "react";
 
 import Link from "../Link/Link";
 import Container from "../Container/Container";
+import { footerLinks } from "../../utils/constants";
 import "./Footer.css";
 
-const links = [
-  {
-    id: 1,
-    title: "Яндекс.Практикум",
-    url: "https://practicum.yandex.ru/",
-  },
-  {
-    id: 2,
-    title: "Github",
-    url: "https://github.com/famovkin",
-  },
-  {
-    id: 3,
-    title: "Telegram",
-    url: "https://t.me/famovkin",
-  },
-];
-
-function Footer() {
+const Footer = () => {
   return (
     <footer className="footer">
       <Container>
@@ -32,7 +15,7 @@ function Footer() {
         <div className="footer__information">
           <p className="footer__year">&#169; 2022</p>
           <ul className="footer__links">
-            {links.map((link) => (
+            {footerLinks.map((link) => (
               <Link key={link.id} {...link} />
             ))}
           </ul>
@@ -40,6 +23,6 @@ function Footer() {
       </Container>
     </footer>
   );
-}
+};
 
 export default Footer;

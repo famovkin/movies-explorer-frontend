@@ -2,12 +2,24 @@ import React from "react";
 
 import "./Button.css";
 
-function Button({ children, className, type = "button", handler }) {
+const Button = ({
+  children,
+  className,
+  type = "button",
+  handler,
+  isFormValid = true,
+  isLoading,
+}) => {
   return (
-    <button className={`button ${className}`} type={type} onClick={handler}>
+    <button
+      className={`button ${className}`}
+      type={type}
+      onClick={handler}
+      disabled={!isFormValid || isLoading}
+    >
       {children}
     </button>
   );
-}
+};
 
 export default Button;

@@ -5,42 +5,10 @@ import Container from "../Container/Container";
 import Link from "../Link/Link";
 import Project from "../Project/Project";
 import photo from "../../images/avatar.jpeg";
+import { socialLinks, projects } from "../../utils/constants";
 import "./AboutMe.css";
 
-function AboutMe() {
-  const links = [
-    {
-      id: 1,
-      title: "Github",
-      url: "https://github.com/famovkin",
-      modifier: "medium",
-    },
-    {
-      id: 2,
-      title: "Telegram",
-      url: "https://t.me/famovkin",
-      modifier: "medium",
-    },
-  ];
-
-  const projects = [
-    {
-      id: 1,
-      title: "Статичный сайт",
-      url: "https://famovkin.github.io/how-to-learn/",
-    },
-    {
-      id: 2,
-      title: "Адаптивный сайт",
-      url: "https://famovkin.github.io/russian-travel/",
-    },
-    {
-      id: 3,
-      title: "Одностраничное приложение",
-      url: "https://mesto.nomoredomains.xyz/",
-    },
-  ];
-
+const AboutMe = () => {
   return (
     <Container modifier="container_type_landing">
       <section className="about-me main__about-me" id="student">
@@ -54,12 +22,12 @@ function AboutMe() {
             <p className="student__description">
               Я живу в Гусь-Хрустальном, закончил факультет информационной
               безопасности в РосНОУ. С 2021 года начал я изучать веб-разработку.
-              Мне нравится писать код, создавать удобные приложения и
-              постоянно узучать что-то новое для себя. В свободное время я рисую
-              портреты и ещё увлекаюсь моддингом клавиатур.
+              Мне нравится писать код, создавать удобные приложения и постоянно
+              узучать что-то новое для себя. В свободное время я рисую портреты
+              и ещё увлекаюсь моддингом клавиатур.
             </p>
             <ul className="student__socials">
-              {links.map((link) => (
+              {socialLinks.map((link) => (
                 <Link key={link.id} {...link} />
               ))}
             </ul>
@@ -77,6 +45,6 @@ function AboutMe() {
       </section>
     </Container>
   );
-}
+};
 
 export default AboutMe;

@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Input.css";
 
-function Input({ name, label, error, modifier, ...rest }) {
+const Input = ({ name, label, error, modifier, ...props }) => {
   return (
     <>
       <div className={`input app__input input_type_${modifier}`}>
@@ -13,10 +13,12 @@ function Input({ name, label, error, modifier, ...rest }) {
           {label}
         </label>
         <input
-          className={`input__field input__field_type_${modifier}`}
+          className={`input__field input__field_type_${modifier} ${
+            props.disabled ? "input_field_type_disabled" : ""
+          }`}
           id={name}
           name={name}
-          {...rest}
+          {...props}
         />
       </div>
       <span className={`input__error input__error_type_${modifier}`}>
@@ -24,6 +26,6 @@ function Input({ name, label, error, modifier, ...rest }) {
       </span>
     </>
   );
-}
+};
 
 export default Input;

@@ -1,30 +1,90 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 
 import Button from "../Button/Button";
 import Icons from "../Icons";
-import savedPageContext from "../../context/saved-page-context";
+import { getCorrectDuration } from "../../utils/getCorrectDuration";
+import {
+  SERVER_URL,
+  UNKNOWN_IMAGE_URL,
+  UNKNOWN_TRAILER_URL,
+  UNKNOWN_CARD_TEXT,
+} from "../../utils/constants";
 import "./MoviesCard.css";
 
-function MoviesCard({ title, duration, imageUrl }) {
-  const { onSavedPage } = useContext(savedPageContext);
+const MoviesCard =({
+  onSavedPage,
+  savedMovies,
+  onSaveHandler,
+  onDeleteHandler,
+  ...props
+}) => {
   const [isSaved, setIsSaved] = useState(false);
 
-  const handleSave = () => setIsSaved(!isSaved);
-  const handleDelete = () => console.log("Удаление карточки");
+  useEffect(() => {
+    // окрашиваем кнопку лайка, если он фильм нашелся в сохраненных
+    if (savedMovies.some((movie) => movie.movieId === props.id)) {
+      setIsSaved(true);
+    }
+  }, [savedMovies, props.id]);
+
+  const handleSave = () => {
+    // создаем объект фильма для сохранения
+    // добавляем дефолтные значения
+    const movieData = {
+      country: props.country || UNKNOWN_CARD_TEXT,
+      director: props.director || UNKNOWN_CARD_TEXT,
+      duration: props.duration,
+      year: props.year || UNKNOWN_CARD_TEXT,
+      description: props.description || UNKNOWN_CARD_TEXT,
+      image: SERVER_URL + props.image.url || UNKNOWN_IMAGE_URL,
+      trailerLink: props.trailerLink || UNKNOWN_TRAILER_URL,
+      nameRU: props.nameRU || props.nameEN || UNKNOWN_CARD_TEXT,
+      nameEN: props.nameEN || props.nameRU || UNKNOWN_CARD_TEXT,
+      thumbnail: SERVER_URL + props.image.formats.thumbnail.url || UNKNOWN_IMAGE_URL,
+      movieId: props.id,
+    };
+    onSaveHandler(movieData, setIsSaved);
+  };
+
+  const handleDelete = () => {
+    // условие для удаления с обоих страниц
+    // так как ключи в объектах отличаются
+    onDeleteHandler(props._id || props.id, setIsSaved);
+  };
 
   return (
     <li className="movies-card">
       <div className="movies-card__header">
-        <h2 className="movies-card__title">{title}</h2>
-        <p className="movies-card__duration">{duration} минут</p>
+        <h2 className="movies-card__title">{props.nameRU}</h2>
+        <p className="movies-card__duration">
+          {getCorrectDuration(props.duration)}
+        </p>
       </div>
-      <img className="movies-card__image" src={imageUrl} alt={title} />
+      <a
+        className="movies-card__link"
+        href={props.trailerLink}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          className="movies-card__image"
+          src={onSavedPage ? props.image : SERVER_URL + props.image.url}
+          alt={props.nameRU}
+        />
+      </a>
+
       <div className="movies-card__footer">
         <Button
           className={`button_type_card ${
-            isSaved && !onSavedPage ? "button_type_red" : "button_type_gray"
+             isSaved && !onSavedPage
+              ? "button_type_red"
+              : "button_type_gray"
           }`}
-          handler={!onSavedPage ? handleSave : handleDelete }
+          handler={onSavedPage
+            ? handleDelete
+            : isSaved
+              ? handleDelete
+              : handleSave}
         >
           {onSavedPage
             ? (<Icons.Delete />)
@@ -35,6 +95,6 @@ function MoviesCard({ title, duration, imageUrl }) {
       </div>
     </li>
   );
-}
+};
 
 export default MoviesCard;

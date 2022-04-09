@@ -3,11 +3,10 @@ import React from "react";
 import Container from "../Container/Container";
 import Title from "../Title/Title";
 import TechIcon from "../TechIcon/TechIcon";
+import { STACK } from "../../utils/constants";
 import "./Techs.css";
 
-const stack = ["HTML", "CSS", "JS", "React", "Git", "Express.js", "mongoDB"];
-
-function Techs() {
+const Techs = () => {
   return (
     <section className="techs" id="techs">
       <Container modifier="container_type_landing">
@@ -20,13 +19,13 @@ function Techs() {
           </p>
         </div>
         <ul className="techs__list">
-          {stack.map((tech) => (
+          {STACK.map((tech) => (
             <TechIcon key={tech} title={tech} />
           ))}
         </ul>
       </Container>
     </section>
   );
-}
+};
 
 export default Techs;

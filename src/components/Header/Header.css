@@ -27,6 +27,10 @@
   padding: 0;
 }
 
+.header__links_type_hidden {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .header__links {
     display: none;
@@ -67,6 +71,7 @@
 
 .header__burger-icon {
   display: none;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
