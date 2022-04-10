@@ -16,18 +16,18 @@ export const socialLinks = [
 export const projects = [
   {
     id: 1,
-    title: "Статичный сайт",
-    url: "https://famovkin.github.io/how-to-learn/",
+    title: "Социальная сеть с фотографиями",
+    url: "https://mesto.nomoredomains.xyz/",
   },
   {
     id: 2,
-    title: "Адаптивный сайт",
-    url: "https://famovkin.github.io/russian-travel/",
+    title: "Интернет-магазин кроссовок",
+    url: "https://famovkin.github.io/react-sneakers/",
   },
   {
     id: 3,
-    title: "Одностраничное приложение",
-    url: "https://mesto.nomoredomains.xyz/",
+    title: "Интернет-магазин пиццерии",
+    url: "https://pet-pizza.herokuapp.com/",
   },
 ];
 
