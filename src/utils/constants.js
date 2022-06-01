@@ -17,7 +17,7 @@ export const projects = [
   {
     id: 1,
     title: "Социальная сеть с фотографиями",
-    url: "https://mesto.nomoredomains.xyz/",
+    url: "https://famovkin.github.io/react-mesto-api-full/",
   },
   {
     id: 2,

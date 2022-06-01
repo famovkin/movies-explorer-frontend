@@ -55,7 +55,7 @@ class Api {
 }
 
 export const mainApi = new Api({
-  baseUrl: "https://api.movies-browser.nomoredomains.work/api",
+  baseUrl: "https://diploma-movies-api.herokuapp.com",
   headers: {
     "Content-Type": "application/json",
   },

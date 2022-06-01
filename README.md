@@ -74,4 +74,4 @@ npm start или yarn start
 
 ## Ссылка
 
-https://movies-browser.nomoredomains.work/saved-movies
+https://famovkin.github.io/movies-explorer-frontend/

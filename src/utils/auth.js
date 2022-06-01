@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.movies-browser.nomoredomains.work/api";
+export const BASE_URL = "https://diploma-movies-api.herokuapp.com";
 
 const checkServerResponse = (res) => {
   if (res.ok) {
